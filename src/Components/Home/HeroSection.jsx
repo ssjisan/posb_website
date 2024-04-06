@@ -1,0 +1,41 @@
+import { Box, Container, Typography } from "@mui/material";
+import Navbar from "../../Layout/Navbar/Navbar";
+
+
+export default function HeroSection() {
+    const MainBoxSx = {
+        backgroundImage: "url('/bg.png')", backgroundSize: "cover",
+        backgroundRepeat: "no-repeat", backgroundPosition: 'center', height: "100vh",
+    }
+    const ContainerSx = {
+        height: "80vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: 'column'
+    }
+    const ContentSx = {
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: "40px",
+        display: 'flex',
+    }
+    return (
+        <Box sx={MainBoxSx}>
+            <Navbar />
+            <Container sx={ContainerSx}>
+                <Box sx={ContentSx}>
+                    <Typography variant="h1" sx={{
+                        textAlign: "center",
+                        color: "#fff"
+                    }}>
+                        Advocating for orthopedic patients&apos; needs, promoting excellence in care
+                    </Typography>
+                    <Typography variant="h3" sx={{ textAlign: "center", color: "#fff", fontWeight: "300 !important" }}>
+                        Promoting excellence in patient care and avocation for the needs of patients with Orthopeadic condition
+                    </Typography>
+                </Box>
+            </Container>
+        </Box>
+    )
+}
