@@ -19,6 +19,7 @@ export default function NavMenu() {
         display: forBelow767 ? "none" : "flex",
         justifyContent: "flex-end",
         alignItems: "center",
+        background:"#fff",
     }
     const MenuListSx = {
         display: "flex",
@@ -43,9 +44,9 @@ export default function NavMenu() {
                         return (
                             <Box sx={MenuListSx} key={data.id}>
                                 <Link to={data.link} style={linkStyle}>
-                                    <Box sx={{ ...MenuButtonSx, borderBottom: pathname == data.link && "1px solid #fff" }}>
+                                    <Box sx={{ ...MenuButtonSx, borderBottom: pathname == data.link && "1px solid #F4866F" }}>
                                         <Typography sx={{
-                                            color: pathname == data.link ? "#fff" : "#FFF",
+                                            color: pathname == data.link ? "#F4866F" : "#0D0A25",
                                             fontWeight: pathname == data.link && 500
                                         }}
                                             variant="subtitle2">{data.title}</Typography>

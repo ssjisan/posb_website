@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
-import Navbar from "../../Layout/Navbar/Navbar";
+// import Navbar from "../../Layout/Navbar/Navbar";
 
 
 export default function HeroSection() {
@@ -22,7 +22,6 @@ export default function HeroSection() {
     }
     return (
         <Box sx={MainBoxSx}>
-            <Navbar />
             <Container sx={ContainerSx}>
                 <Box sx={ContentSx}>
                     <Typography variant="h1" sx={{

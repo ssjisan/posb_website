@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Prof R R Kairy",
+        "position": "Chairman",
+        "imgUrl": "/event1.png"
+    },
+    {
+        "id": 2,
+        "name": "Dr Sarwar Ibne Salam ",
+        "position": "Chairman",
+        "imgUrl": "/event2.png"
+    },
+    {
+        "id": 3,
+        "name": "Dr A K M Zahiruddin ",
+        "position": "Chairman",
+        "imgUrl": "/event3.png"
+    },
+    {
+        "id": 4,
+        "name": "Dr Mehedi Newaz",
+        "position": "Chairman",
+        "imgUrl": "/event3.png"
+    },
+    {
+        "id": 5,
+        "name": "Dr Shyamal Chandra Debnath",
+        "position": "Chairman",
+        "imgUrl": "/event2.png"
+    },
+    {
+        "id": 6,
+        "name": "Prof Parviz Shahidi ",
+        "position": "Chairman",
+        "imgUrl": "/event1.png"
+    }
+]

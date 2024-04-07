@@ -1,5 +1,5 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
-import { LogoWhite } from "../../assets/LogoWhite";
+import { Box, Typography, useMediaQuery, IconButton } from "@mui/material";
+import { Logo } from "../../assets/Logo";
 import { Menu, Phone, Whatsapp } from "../../assets/Icons";
 import { Symbolic } from "../../assets/Symbolic";
 
@@ -12,25 +12,27 @@ export default function TopNav() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderBottom: "1px solid #FFF",
+        background: "#FFFFFF",
+        borderBottom: "1px solid rgba(145,142,175,0.32)",
     }
     return (
         <Box sx={NavSx}>
             <Box>
-                {forBelow475 ? <Symbolic /> : <LogoWhite />}
+                {forBelow475 ? <Symbolic /> : <Logo />}
             </Box>
             {
-                forBelow767 ? <Box>
-                    <Menu />
-                </Box> :
+                forBelow767 ?
+                    <IconButton>
+                        <Menu color="#0D0A25" />
+                    </IconButton> :
                     <Box sx={{ display: "flex", gap: "24px", alignItems: "center" }}>
                         <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                            <Whatsapp />
-                            <Typography sx={{ color: "#fff" }}>+8801675893967</Typography>
+                            <Whatsapp color="#0D0A25" />
+                            <Typography sx={{ color: "#0D0A25" }}>+8801675893967</Typography>
                         </Box>
                         <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                            <Phone />
-                            <Typography sx={{ color: "#fff" }}>+8801675893967</Typography>
+                            <Phone color="#0D0A25" />
+                            <Typography sx={{ color: "#0D0A25" }}>+8801675893967</Typography>
                         </Box>
                     </Box>
             }
