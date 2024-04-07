@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom"
 
 //eslint-disable-next-line
 export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
-
+    //eslint-disable-next-line
     const forBelow676 = useMediaQuery("(max-width:676px)");
     const { pathname } = useLocation();
     // Configure Style Start
@@ -69,7 +69,7 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
                 </Box>
             </Box>
             <Box sx={MenuSx}>
-            {
+                {
                     main.map((data) => {
                         return (
                             <Box key={data.id} onClick={goToTop}>
