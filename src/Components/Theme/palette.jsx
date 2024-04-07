@@ -7,9 +7,9 @@ export const grey = {
 };
 
 export const primary = {
-    light: '#F5FBF9',
-    main: '#00AE60',
-    dark: '#008549',
+    light: '#FFF3F0',
+    main: '#F36D50',
+    dark: '#FF3306',
 };
 export const info = {
     light: '#F5FDFF',
