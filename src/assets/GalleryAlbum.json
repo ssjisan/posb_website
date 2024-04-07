@@ -1,0 +1,34 @@
+[{
+    "id": 1,
+    "name": "1st Executive Committee",
+    "thumbnail": "/gallery/executiveBody/1.jpg",
+    "images": [{
+            "original": "/gallery/executiveBody/1.jpg",
+            "thumbnail": "/gallery/executiveBody/1.jpg"
+        },
+        {
+            "original": "/gallery/executiveBody/2.jpg",
+            "thumbnail": "/gallery/executiveBody/2.jpg"
+        },
+        {
+            "original": "/gallery/executiveBody/3.jpg",
+            "thumbnail": "/gallery/executiveBody/3.jpg"
+        },
+        {
+            "original": "/gallery/executiveBody/4.jpg",
+            "thumbnail": "/gallery/executiveBody/4.jpg"
+        },
+        {
+            "original": "/gallery/executiveBody/5.jpg",
+            "thumbnail": "/gallery/executiveBody/5.jpg"
+        },
+        {
+            "original": "/gallery/executiveBody/6.jpg",
+            "thumbnail": "/gallery/executiveBody/6.jpg"
+        },
+        {
+            "original": "/gallery/executiveBody/7.jpg",
+            "thumbnail": "/gallery/executiveBody/7.jpg"
+        }
+    ]
+}]
