@@ -1,4 +1,4 @@
-// import HeroSection from "../Components/Home/HeroSection";
+import HeroSection from "../Components/Home/HeroSection";
 import LatestEvent from "../Components/Common/LatestEvent/LatestEvent";
 import OurJourney from "../Components/Common/OurJourney/OurJourney";
 import Footer from "../Layout/Footer/Footer";
@@ -13,7 +13,7 @@ export default function Home() {
     return (
         <>
             <Navbar />
-            {/* <HeroSection /> */}
+            <HeroSection />
             <OurJourney />
             <ExecutiveMember />
             <LatestEvent />

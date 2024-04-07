@@ -1,10 +1,12 @@
-import { Box, Grid, Typography, Container } from "@mui/material";
+import { Box, Grid, Typography, Container, useMediaQuery } from "@mui/material";
 
 export default function MoreInfo() {
+    const forBelow767 = useMediaQuery("(max-width:767px)");
+
     return (
-        <Container sx={{ mt: "40px", mb: "40px" }}>
-            <Grid container>
-                <Grid item lg={4}>
+        <Container sx={{ mt: forBelow767 ? "24px" : "40px", mb: forBelow767 ? "24px" : "40px" }}>
+            <Grid container spacing={3} sx={{ justifyContent: "center" }}>
+                <Grid item xs={12} sm={12} md={4} lg={4}>
                     <Box sx={{ p: "24px", display: 'flex', flexDirection: "column", gap: "24px", justifyContent: "center", alignItems: "center" }}>
                         <Box sx={{ width: "64px", height: "64px", border: "1px solid #dbdbdb", borderRadius: "8px", display: 'flex', justifyContent: "center", alignItems: "center" }}>
                             <img src="/location.svg" />
@@ -15,7 +17,7 @@ export default function MoreInfo() {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item lg={4}>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
                     <Box sx={{ p: "24px", display: 'flex', flexDirection: "column", gap: "24px", justifyContent: "center", alignItems: "center" }}>
                         <Box sx={{ width: "64px", height: "64px", border: "1px solid #dbdbdb", borderRadius: "8px", display: 'flex', justifyContent: "center", alignItems: "center" }}>
                             <img src="/mail.svg" />
@@ -26,7 +28,7 @@ export default function MoreInfo() {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item lg={4}>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
                     <Box sx={{ p: "24px", display: 'flex', flexDirection: "column", gap: "24px", justifyContent: "center", alignItems: "center" }}>
                         <Box sx={{ width: "64px", height: "64px", border: "1px solid #dbdbdb", borderRadius: "8px", display: 'flex', justifyContent: "center", alignItems: "center" }}>
                             <img src="/phone.svg" />

@@ -1,15 +1,12 @@
-import { useContext } from "react"
-import { DataContext } from "../../DataProcessing/DataProcessing"
-import { Box, Button, Drawer, Typography, useMediaQuery } from "@mui/material"
-import { Close } from "../../Assets/IconSet"
-import { services } from "./NavConfig"
+import { Box, Drawer, Typography, useMediaQuery } from "@mui/material"
+import { main } from "./NavConfig"
 import { Link, useLocation } from "react-router-dom"
 
-export default function MenuDrawer() {
-    const { toggleDrawer, open, handleDrawerClose, handleScheduleModalOpen } = useContext(DataContext)
+//eslint-disable-next-line
+export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
+
     const forBelow676 = useMediaQuery("(max-width:676px)");
     const { pathname } = useLocation();
-    const { goToTop } = useContext(DataContext)
     // Configure Style Start
 
     const linkStyle = {
@@ -52,7 +49,12 @@ export default function MenuDrawer() {
         alignItems: "center",
     }
     // Configure Style End
-
+    const goToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
     return (
         <Drawer
             variant="temporary"
@@ -63,28 +65,23 @@ export default function MenuDrawer() {
         >
             <Box sx={TopBarSx}>
                 <Box sx={CloseButtonSx} onClick={handleDrawerClose}>
-                    <Close />
+                    C
                 </Box>
             </Box>
             <Box sx={MenuSx}>
-                {
-                    services.map((data) => {
+            {
+                    main.map((data) => {
                         return (
-                            <Box sx={{ display: "flex", alignItems: "center" }} key={data.id} onClick={goToTop}>
+                            <Box key={data.id} onClick={goToTop}>
                                 <Link to={data.link} style={linkStyle}>
-                                    <Box sx={{ ...MenuButtonSx, backgroundColor: pathname == data.link && "rgba(0, 174, 96, 0.08)", borderRadius: "4px" }} onClick={handleDrawerClose}>
-                                        <Typography sx={{
-                                            fontSize: forBelow676 && "18px",
-                                            color: pathname == data.link && "#00AE60",
-                                            fontWeight: pathname == data.link && 500
-                                        }}>{data.title}</Typography>
+                                    <Box sx={{ ...MenuButtonSx, borderBottom: pathname === data.link ? "2px solid #0D0A25" : "2px solid transparent" }}>
+                                        <Typography variant="subtitle2">{data.title}</Typography>
                                     </Box>
                                 </Link>
                             </Box>
                         )
                     })
                 }
-                <Button variant="contained" color="primary" size="small" onClick={handleScheduleModalOpen}>Schedule a Call</Button>
             </Box>
         </Drawer>
     )

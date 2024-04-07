@@ -28,7 +28,7 @@ export default function Albums() {
             {
                 GalleryAlbum.map((data) => {
                     return (
-                        <Grid item xs={12} sm={6} md={4} lg={4} key={data.id}>
+                        <Grid item xs={12} sm={6} md={6} lg={4} key={data.id}>
                             <Box sx={{ display: "flex", gap: "24px", flexDirection: "column", p: "24px 12px" }} onClick={() => handleOpen(data.images)}>
                                 <Box sx={{ width: "100%", height: "260px", overflow: "hidden", borderRadius: "16px" }}>
                                     <img src={data.thumbnail} alt="" width="100%" height="100%" />
@@ -47,7 +47,7 @@ export default function Albums() {
                     )
                 })
             }
-            <AlbumView handleClose={handleClose} open={open} selectedImages={selectedImages}/>
+            <AlbumView handleClose={handleClose} open={open} selectedImages={selectedImages} />
         </Grid>
     )
 }

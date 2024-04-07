@@ -5,6 +5,8 @@ import RequestProject from "./RequestProject";
 import { Logo } from "../../assets/Logo";
 
 export default function Footer() {
+    const forBelow767 = useMediaQuery("(max-width:767px)");
+
     const forBelow599 = useMediaQuery("(max-width:599px)");
 
     const FooterContainerSx = {
@@ -24,12 +26,12 @@ export default function Footer() {
 
     return (
         <Box sx={FooterContainerSx}>
-            <Container sx={{ pt: "80px", pb: "32px", borderTop: "1px solid  rgba(145,158,171,0.32)" }}>
+            <Container sx={{ pt: forBelow767 ? "40px" : "80px", pb: "32px", borderTop: "1px solid  rgba(145,158,171,0.32)" }}>
                 <Box sx={{p:"24px 0px"}}>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={12} lg={12}>
                             <Box sx={{width:"100%",maxWidth:"320px"}}>
-                                <Logo />
+                                <Logo colorOne="#114285" colorTwo="#151313"/>
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={12} lg={4}>

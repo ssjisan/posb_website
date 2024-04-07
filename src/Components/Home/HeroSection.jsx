@@ -8,7 +8,7 @@ export default function HeroSection() {
         backgroundRepeat: "no-repeat", backgroundPosition: 'center', height: "100vh",
     }
     const ContainerSx = {
-        height: "80vh",
+        height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

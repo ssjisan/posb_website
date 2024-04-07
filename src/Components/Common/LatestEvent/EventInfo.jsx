@@ -1,8 +1,10 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Typography,useMediaQuery } from '@mui/material'
 import { Calender, Clock, Location } from '../../../assets/Icons'
 
 
 export default function EventInfo() {
+    const forBelow599 = useMediaQuery("(max-width:599px)");
+
     const DetailsSx = {
         width: "100%",
         maxWidth: "450px",
@@ -20,7 +22,7 @@ export default function EventInfo() {
         gap: "16px"
     }
     return (
-        <Box sx={{ mt: "40px" }}>
+        <Box sx={{ mt: !forBelow599 && "40px" }}>
             <Typography variant='h3'>POSBCON 2024</Typography>
             <Box sx={DetailsSx}>
                 <Box sx={PointSx}>

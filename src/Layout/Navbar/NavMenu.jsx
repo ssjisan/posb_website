@@ -1,7 +1,8 @@
 import { Box, Typography, useMediaQuery } from "@mui/material"
 import { main } from "./NavConfig"
 import { Link, useLocation } from "react-router-dom";
-export default function NavMenu() {
+// eslint-disable-next-line
+export default function NavMenu({ isScrolled }) {
     const { pathname } = useLocation();
 
     // eslint-disable-next-line
@@ -19,7 +20,6 @@ export default function NavMenu() {
         display: forBelow767 ? "none" : "flex",
         justifyContent: "flex-end",
         alignItems: "center",
-        background:"#fff",
     }
     const MenuListSx = {
         display: "flex",
@@ -36,18 +36,23 @@ export default function NavMenu() {
 
     // Configure Style End
 
+    const goToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
     return (
         <Box sx={NavSx}>
             <Box sx={{ display: "flex", gap: "16px" }}>
                 {
                     main.map((data) => {
                         return (
-                            <Box sx={MenuListSx} key={data.id}>
+                            <Box sx={MenuListSx} key={data.id} onClick={goToTop}>
                                 <Link to={data.link} style={linkStyle}>
-                                    <Box sx={{ ...MenuButtonSx, borderBottom: pathname == data.link && "1px solid #F4866F" }}>
+                                    <Box sx={{ ...MenuButtonSx, borderBottom: pathname === data.link ? "2px solid #0D0A25" : "2px solid transparent" }}>
                                         <Typography sx={{
-                                            color: pathname == data.link ? "#F4866F" : "#0D0A25",
-                                            fontWeight: pathname == data.link && 500
+                                            color: pathname === "/" ? (isScrolled ? "#0D0A25" : "#fff") : "#0D0A25"
                                         }}
                                             variant="subtitle2">{data.title}</Typography>
                                     </Box>
