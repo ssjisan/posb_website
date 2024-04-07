@@ -12,7 +12,7 @@ export default function MainRoute() {
       <Route path="/" element={<Home />} />
       <Route path="upcoming_events" element={<UpcomingEventsPage />} />
       <Route path="gallery" element={<Gallerys />} />
-      <Route path="upcoming_events" element={<Contact />} />
+      <Route path="contact" element={<Contact />} />
       <Route path="members" element={<Member />} />
     </Routes>
   );

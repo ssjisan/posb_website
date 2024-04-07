@@ -1,6 +1,6 @@
 import LatestEvent from "../Components/Common/LatestEvent/LatestEvent";
 import UpcomingEvents from "../Components/Common/UpComingEvents/UpcomingEvents";
-import Location from "../Components/Home/Location";
+import Location from "../Components/Common/Location";
 import Footer from "../Layout/Footer/Footer";
 import Navbar from "../Layout/Navbar/Navbar";
 
