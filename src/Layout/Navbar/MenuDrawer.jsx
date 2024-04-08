@@ -1,6 +1,7 @@
 import { Box, Drawer, Typography, useMediaQuery } from "@mui/material"
 import { main } from "./NavConfig"
 import { Link, useLocation } from "react-router-dom"
+import { Close } from "../../assets/Icons";
 
 //eslint-disable-next-line
 export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
@@ -65,7 +66,7 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
         >
             <Box sx={TopBarSx}>
                 <Box sx={CloseButtonSx} onClick={handleDrawerClose}>
-                    C
+                    <Close/>
                 </Box>
             </Box>
             <Box sx={MenuSx}>
@@ -75,7 +76,7 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
                             <Box key={data.id} onClick={goToTop}>
                                 <Link to={data.link} style={linkStyle}>
                                     <Box sx={{ ...MenuButtonSx, borderBottom: pathname === data.link ? "2px solid #0D0A25" : "2px solid transparent" }}>
-                                        <Typography variant="subtitle2">{data.title}</Typography>
+                                        <Typography variant="h4">{data.title}</Typography>
                                     </Box>
                                 </Link>
                             </Box>
