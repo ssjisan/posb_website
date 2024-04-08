@@ -50,9 +50,12 @@ export default function NavMenu({ isScrolled }) {
                         return (
                             <Box sx={MenuListSx} key={data.id} onClick={goToTop}>
                                 <Link to={data.link} style={linkStyle}>
-                                    <Box sx={{ ...MenuButtonSx, borderBottom: pathname === data.link ? "2px solid #0D0A25" : "2px solid transparent" }}>
+                                    <Box sx={{
+                                        ...MenuButtonSx,
+                                        borderBottom: pathname === "/" && data.link === pathname ? (isScrolled ? "2px solid orange" : "2px solid #fff") : data.link === pathname ? "2px solid orange" : "2px solid transparent"
+                                    }}>
                                         <Typography sx={{
-                                            color: pathname === "/" ? (isScrolled ? "#0D0A25" : "#fff") : "#0D0A25"
+                                            color: pathname === "/" ? (isScrolled ? pathname === data.link ? "#F4866F" : "#000" : "#FFF") : (pathname === data.link ? "#F4866F" : "#000")
                                         }}
                                             variant="subtitle2">{data.title}</Typography>
                                     </Box>
