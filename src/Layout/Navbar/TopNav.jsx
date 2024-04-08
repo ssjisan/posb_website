@@ -4,7 +4,7 @@ import { Menu, Phone, Whatsapp } from "../../assets/Icons";
 import { Symbolic } from "../../assets/Symbolic";
 import { useLocation } from "react-router-dom";
 import MenuDrawer from "./MenuDrawer"
-import {useState} from "react"
+import { useState } from "react"
 //eslint-disable-next-line
 export default function TopNav({ isScrolled }) {
     const { pathname } = useLocation();
@@ -34,7 +34,7 @@ export default function TopNav({ isScrolled }) {
         <Box sx={NavSx}>
             <Box>
                 {forBelow475
-                    ? <Symbolic />
+                    ? <Symbolic colorOne={pathname === "/" ? (isScrolled ? "#114285" : "#fff") : "#114285"} colorTwo={pathname === "/" ? (isScrolled ? "#151313" : "#fff") : "#151313"} />
                     : <Logo colorOne={pathname === "/" ? (isScrolled ? "#114285" : "#fff") : "#114285"} colorTwo={pathname === "/" ? (isScrolled ? "#151313" : "#fff") : "#151313"} />}
             </Box>
             {
