@@ -8,20 +8,40 @@ import PresidentSpeech from "../Components/Common/PresidentSpeech/PresidentSpeec
 import EventNews from "../Components/Common/Notice&News/NoticeNews";
 import Location from "../Components/Common/Location";
 import ExecutiveMember from "../Components/Common/ExecutiveMember/ExecutiveMember";
+import { useEffect, useState } from "react";
+import BigEventModal from "../Components/Common/BigEvent/BigEventModal";
 
 export default function Home() {
-    return (
-        <>
-            <Navbar />
-            <HeroSection />
-            <OurJourney />
-            <ExecutiveMember />
-            <LatestEvent />
-            <UpcomingEvents />
-            <PresidentSpeech />
-            <EventNews />
-            <Location />
-            <Footer />
-        </>
-    )
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const lastShown = localStorage.getItem("modalLastShown");
+    const now = new Date().getTime();
+
+    // Show modal if 24 hours have passed since the last shown time
+    if (!lastShown || now - lastShown > 24 * 60 * 60 * 1000) {
+      setIsModalOpen(true);
+      localStorage.setItem("modalLastShown", now);
+    }
+  }, []);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  
+  return (
+    <>
+      <BigEventModal open={isModalOpen} onClose={handleCloseModal} />
+      <Navbar />
+      <HeroSection />
+      <OurJourney />
+      <ExecutiveMember />
+      <LatestEvent />
+      <UpcomingEvents />
+      <PresidentSpeech />
+      <EventNews />
+      <Location />
+      <Footer />
+    </>
+  );
 }
