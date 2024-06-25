@@ -1,14 +1,16 @@
-import { Container, Box, Grid, useMediaQuery } from "@mui/material";
+import { Container, Box, Grid, useMediaQuery, Skeleton } from "@mui/material";
 import HeaderSection from "./HeaderSection";
 import EventInfo from "./EventInfo";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function LatestEvent() {
   const { pathname } = useLocation();
   const forBelow767 = useMediaQuery("(max-width:767px)");
   const [lastEvent, setLastEvent] = useState(null);
+  const [loading, setLoading] = useState(true); // State for loading
 
   useEffect(() => {
     loadEvents();
@@ -18,13 +20,12 @@ export default function LatestEvent() {
     try {
       const { data } = await axios.get("https://posb-server.vercel.app/events");
       if (data.length > 0) {
-        // Sort events by createdAt in descending order (latest first)
-        const sortedEvents = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        // Set the latest event
-        setLastEvent(sortedEvents[0]);
+        setLastEvent(data[0]);
       }
     } catch (err) {
-      console.log("Check");
+      toast.error("Event Loading Problem.");
+    } finally {
+      setLoading(false); // Set loading to false after data is loaded
     }
   };
   return (
@@ -50,25 +51,29 @@ export default function LatestEvent() {
         <HeaderSection />
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={6}>
-            <EventInfo lastEvent={lastEvent} />
+            <EventInfo lastEvent={lastEvent} loading={loading}/>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <Box
+          <Box
               sx={{
                 width: "100%",
                 height: "320px",
                 borderRadius: "16px",
                 overflow: "hidden",
-                border:"1px solid rgba(145,142,175, .32)"
+                border: "1px solid rgba(145,142,175, .32)",
               }}
             >
-              <img
-                src={`https://posb-server.vercel.app/event/image/${lastEvent?._id}`}
-                alt="Event Image"
-                width="100%"
-                height="100%"
-                style={{ objectFit: "contain" }}
-              />
+              {loading ? (
+                <Skeleton variant="rectangular" width="100%" height="100%" />
+              ) : (
+                <img
+                  src={`https://posb-server.vercel.app/event/image/${lastEvent?._id}`}
+                  alt="Event Image"
+                  width="100%"
+                  height="100%"
+                  style={{ objectFit: "contain" }}
+                />
+              )}
             </Box>
           </Grid>
         </Grid>

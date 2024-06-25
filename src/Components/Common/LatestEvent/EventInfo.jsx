@@ -1,8 +1,9 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery, Skeleton } from "@mui/material";
 import { Calender, Clock, Location } from "../../../assets/Icons";
 import { format } from "date-fns";
+import PropTypes from "prop-types";
 
-export default function EventInfo({lastEvent}) {
+export default function EventInfo({ lastEvent, loading }) {
   const forBelow599 = useMediaQuery("(max-width:599px)");
 
   const DetailsSx = {
@@ -22,38 +23,69 @@ export default function EventInfo({lastEvent}) {
     gap: "16px",
   };
 
-  
   return (
-    <>
-      {lastEvent ? (
-        <Box sx={{ mt: !forBelow599 && "40px" }}>
-          <Typography variant="h3">{lastEvent?.name}</Typography>
+    <Box sx={{ mt: !forBelow599 && "40px" }}>
+      {loading || !lastEvent ? (
+        <>
+          <Skeleton variant="text" width={200} height={50} />
+          <Box sx={DetailsSx}>
+            <Box sx={PointSx}>
+              <Box sx={IconBoxSx}>
+                <Skeleton variant="circular" width={24} height={24} />
+              </Box>
+              <Skeleton variant="text" width={150} height={30} />
+            </Box>
+            <Box sx={PointSx}>
+              <Box sx={IconBoxSx}>
+                <Skeleton variant="circular" width={24} height={24} />
+              </Box>
+              <Skeleton variant="text" width={150} height={30} />
+            </Box>
+            <Box sx={PointSx}>
+              <Box sx={IconBoxSx}>
+                <Skeleton variant="circular" width={24} height={24} />
+              </Box>
+              <Skeleton variant="text" width={150} height={30} />
+            </Box>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Typography variant="h3">{lastEvent.name}</Typography>
           <Box sx={DetailsSx}>
             <Box sx={PointSx}>
               <Box sx={IconBoxSx}>
                 <Calender />
               </Box>
               <Typography variant="h6">
-                {format(new Date(lastEvent?.eventDate), "dd/MM/yyyy")}
+                {format(new Date(lastEvent.eventDate), "dd/MM/yyyy")}
               </Typography>
             </Box>
             <Box sx={PointSx}>
               <Box sx={IconBoxSx}>
                 <Clock />
               </Box>
-              <Typography variant="h6">{lastEvent?.eventTime}</Typography>
+              <Typography variant="h6">{lastEvent.eventTime}</Typography>
             </Box>
             <Box sx={PointSx}>
               <Box sx={IconBoxSx}>
                 <Location />
               </Box>
-              <Typography variant="h6">{lastEvent?.location}</Typography>
+              <Typography variant="h6">{lastEvent.location}</Typography>
             </Box>
           </Box>
-        </Box>
-      ) : (
-        <Typography>No latest Event</Typography>
+        </>
       )}
-    </>
+    </Box>
   );
 }
+
+EventInfo.propTypes = {
+  lastEvent: PropTypes.shape({
+    name: PropTypes.string,
+    eventDate: PropTypes.string,
+    eventTime: PropTypes.string,
+    location: PropTypes.string,
+  }),
+  loading: PropTypes.bool.isRequired, // Add prop type for loading
+};

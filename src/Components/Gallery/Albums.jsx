@@ -21,6 +21,7 @@ export default function Albums() {
 
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [imageLoading, setImageLoading] = useState({});
   const [open, setOpen] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]); // State for selected images
 
@@ -54,10 +55,18 @@ export default function Albums() {
     }
   };
 
+  const handleImageLoad = (albumId) => {
+    setImageLoading((prev) => ({ ...prev, [albumId]: false }));
+  };
+
+  const handleImageError = (albumId) => {
+    setImageLoading((prev) => ({ ...prev, [albumId]: false }));
+  };
+
   return (
     <Grid container spacing={3}>
       {loading ? (
-        Array.from(new Array(6)).map((_, index) => (
+        Array.from(new Array(3)).map((_, index) => (
           <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
             <Box
               sx={{
@@ -94,7 +103,7 @@ export default function Albums() {
                 gap: "24px",
                 flexDirection: "column",
                 p: "24px 12px",
-                cursor:"pointer"
+                cursor: "pointer",
               }}
               onClick={() => handleOpen(data.images)}
             >
@@ -104,15 +113,26 @@ export default function Albums() {
                   height: "260px",
                   overflow: "hidden",
                   borderRadius: "16px",
+                  position: "relative",
                 }}
               >
+                {imageLoading[data._id] !== false && (
+                  <Skeleton
+                    variant="rectangular"
+                    width="100%"
+                    height="100%"
+                    sx={{ position: "absolute", top: 0, left: 0 }}
+                  />
+                )}
                 {data.images && data.images.length > 0 ? (
                   <img
                     src={data.images[0].url}
                     alt={data.name}
                     width="100%"
                     height="100%"
-                    style={{ objectFit: "cover" }}
+                    style={{ objectFit: "cover", display: imageLoading[data._id] === false ? 'block' : 'none' }}
+                    onLoad={() => handleImageLoad(data._id)}
+                    onError={() => handleImageError(data._id)}
                   />
                 ) : (
                   <Typography>No Image Available</Typography>
