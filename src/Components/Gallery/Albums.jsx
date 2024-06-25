@@ -1,4 +1,4 @@
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Grid, Skeleton } from "@mui/material";
 import { AlbumIcon } from "../../assets/Icons";
 import AlbumView from "./AlbumView";
 import { useEffect, useState } from "react";
@@ -20,6 +20,7 @@ export default function Albums() {
   };
 
   const [albums, setAlbums] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]); // State for selected images
 
@@ -46,65 +47,99 @@ export default function Albums() {
     try {
       const { data } = await axios.get("https://posb-server.vercel.app/albums");
       setAlbums(data);
+      setLoading(false);
     } catch (err) {
       toast.error(err.message);
+      setLoading(false);
     }
   };
 
   return (
     <Grid container spacing={3}>
-      {albums.map((data) => (
-        <Grid item xs={12} sm={6} md={6} lg={4} key={data._id}>
-          <Box
-            sx={{
-              display: "flex",
-              gap: "24px",
-              flexDirection: "column",
-              p: "24px 12px",
-            }}
-            onClick={() => handleOpen(data.images)}
-          >
-            <Box
-              sx={{
-                width: "100%",
-                height: "260px",
-                overflow: "hidden",
-                borderRadius: "16px",
-              }}
-            >
-              {data.images && data.images.length > 0 ? (
-                <img
-                  src={data.images[0].url}
-                  alt={data.name}
-                  width="100%"
-                  height="100%"
-                  style={{ objectFit: "cover" }}
-                />
-              ) : (
-                <Typography>No Image Available</Typography>
-              )}
-            </Box>
+      {loading ? (
+        Array.from(new Array(6)).map((_, index) => (
+          <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
             <Box
               sx={{
                 display: "flex",
                 gap: "24px",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
+                flexDirection: "column",
+                p: "24px 12px",
               }}
             >
-              <Typography variant="h4">{data.name}</Typography>
-              <Box sx={PointSx}>
-                <Box sx={IconBoxSx}>
-                  <AlbumIcon />
+              <Skeleton variant="rectangular" width="100%" height="260px" />
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "24px",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                }}
+              >
+                <Skeleton variant="text" width="60%" />
+                <Box sx={PointSx}>
+                  <Skeleton variant="circular" width="24px" height="24px" />
+                  <Skeleton variant="text" width="60px" />
                 </Box>
-                <Typography variant="body1" color={"text.secondary"}>
-                  {data.images ? `${data.images.length} images` : "No images"}
-                </Typography>
               </Box>
             </Box>
-          </Box>
-        </Grid>
-      ))}
+          </Grid>
+        ))
+      ) : (
+        albums.map((data) => (
+          <Grid item xs={12} sm={6} md={6} lg={4} key={data._id}>
+            <Box
+              sx={{
+                display: "flex",
+                gap: "24px",
+                flexDirection: "column",
+                p: "24px 12px",
+                cursor:"pointer"
+              }}
+              onClick={() => handleOpen(data.images)}
+            >
+              <Box
+                sx={{
+                  width: "100%",
+                  height: "260px",
+                  overflow: "hidden",
+                  borderRadius: "16px",
+                }}
+              >
+                {data.images && data.images.length > 0 ? (
+                  <img
+                    src={data.images[0].url}
+                    alt={data.name}
+                    width="100%"
+                    height="100%"
+                    style={{ objectFit: "cover" }}
+                  />
+                ) : (
+                  <Typography>No Image Available</Typography>
+                )}
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "24px",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                }}
+              >
+                <Typography variant="h4">{data.name}</Typography>
+                <Box sx={PointSx}>
+                  <Box sx={IconBoxSx}>
+                    <AlbumIcon />
+                  </Box>
+                  <Typography variant="body1" color={"text.secondary"}>
+                    {data.images ? `${data.images.length} images` : "No images"}
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Grid>
+        ))
+      )}
       <AlbumView
         handleClose={handleClose}
         open={open}
