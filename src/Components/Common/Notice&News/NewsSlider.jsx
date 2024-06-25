@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import Slider from "react-slick";
 import { useEffect, useState } from "react";
-import NewsNotice from "../../../assets/NewsNotice.json";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -48,10 +47,7 @@ export default function NewsSlider() {
       },
     ],
   };
-  const LinkStyle = {
-    textDecoration: "none",
-    color: "inherit", // This will keep the color from changing
-  };
+  
   const loadNotices = async () => {
     try {
       const { data } = await axios.get(
@@ -63,7 +59,7 @@ export default function NewsSlider() {
     }
   };
   return (
-    <div className="slider-container">
+    <div className="slider-container" >
       <Slider {...settings}>
         {notices.map((data) => {
           const isoDate = data.createdAt;
@@ -72,13 +68,18 @@ export default function NewsSlider() {
           const month = date.toLocaleString("en-US", { month: "short" });
 
           return (
-            <Link key={data.id} to={data.link} target="_blank" style={{textDecoration:"none"}}>
+            <Link
+              key={data._id}
+              href={data.link}
+              target="_blank"
+            >
               <Box
                 sx={{
                   display: "flex !important",
                   gap: "16px",
                   p: "0px 24px",
                   height: "86px",
+                  textDecoration:"none !important",
                 }}
                 
               >

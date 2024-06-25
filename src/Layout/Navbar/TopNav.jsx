@@ -65,25 +65,31 @@ export default function TopNav({ isScrolled }) {
         </IconButton>
       ) : (
         <Box sx={{ display: "flex", gap: "24px", alignItems: "center" }}>
-          <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <Whatsapp
-              color={
-                pathname === "/" ? (isScrolled ? "#0D0A25" : "#fff") : "#0D0A25"
-              }
-            />
-            <Typography
-              sx={{
-                color:
+          <a aria-label="Chat on WhatsApp" href="https://wa.me/+8801787863140" target="_blank" style={{textDecoration:"none"}}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Whatsapp
+                color={
                   pathname === "/"
                     ? isScrolled
                       ? "#0D0A25"
                       : "#fff"
-                    : "#0D0A25",
-              }}
-            >
-              +8801675893967
-            </Typography>
-          </Box>
+                    : "#0D0A25"
+                }
+              />
+              <Typography
+                sx={{
+                  color:
+                    pathname === "/"
+                      ? isScrolled
+                        ? "#0D0A25"
+                        : "#fff"
+                      : "#0D0A25",
+                }}
+              >
+                +8801675893967
+              </Typography>
+            </Box>
+          </a>
           <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <Phone
               color={
