@@ -1,12 +1,15 @@
 import { Box, Typography, Skeleton } from "@mui/material";
 import Slider from "react-slick";
-import { useEffect, useState } from "react";
 import { Calender, Clock, Location } from "../../../assets/Icons";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { format } from "date-fns";
+import PropTypes from "prop-types";
 
-export default function EventsSlider() {
+export default function EventsSlider({
+  loading,
+  setActiveIndex,
+  events,
+  activeIndex,
+}) {
   const DetailsSx = {
     width: "100%",
     maxWidth: "450px",
@@ -22,9 +25,6 @@ export default function EventsSlider() {
     display: "flex",
     gap: "16px",
   };
-  const [activeIndex, setActiveIndex] = useState(0); // Initialize active index state
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true); // Initialize loading state
 
   const settings = {
     dots: false,
@@ -62,22 +62,6 @@ export default function EventsSlider() {
         },
       },
     ],
-  };
-
-  // Load Event
-  useEffect(() => {
-    loadEvents();
-  }, []);
-
-  const loadEvents = async () => {
-    try {
-      const { data } = await axios.get("https://posb-server.vercel.app/events");
-      setEvents(data);
-      setLoading(false);
-    } catch (err) {
-      toast.error("Event loading problem");
-      setLoading(false);
-    }
   };
 
   return (
@@ -201,3 +185,10 @@ export default function EventsSlider() {
     </div>
   );
 }
+
+EventsSlider.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  setActiveIndex: PropTypes.func.isRequired,
+  events: PropTypes.array.isRequired,
+  activeIndex: PropTypes.number.isRequired,
+};
