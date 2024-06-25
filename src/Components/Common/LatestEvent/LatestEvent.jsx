@@ -16,9 +16,12 @@ export default function LatestEvent() {
 
   const loadEvents = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/events");
+      const { data } = await axios.get("https://posb-server.vercel.app/events");
       if (data.length > 0) {
-        setLastEvent(data[data.length - 1]);
+        // Sort events by createdAt in descending order (latest first)
+        const sortedEvents = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        // Set the latest event
+        setLastEvent(sortedEvents[0]);
       }
     } catch (err) {
       console.log("Check");
@@ -53,17 +56,18 @@ export default function LatestEvent() {
             <Box
               sx={{
                 width: "100%",
-                height: "100%",
+                height: "320px",
                 borderRadius: "16px",
                 overflow: "hidden",
+                border:"1px solid rgba(145,142,175, .32)"
               }}
             >
               <img
-                src={`${process.env.REACT_APP_SERVER_API}/event/image/${lastEvent?._id}`}
+                src={`https://posb-server.vercel.app/event/image/${lastEvent?._id}`}
                 alt="Event Image"
                 width="100%"
                 height="100%"
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "contain" }}
               />
             </Box>
           </Grid>

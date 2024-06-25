@@ -5,10 +5,10 @@ import { Box, Container, Typography } from "@mui/material";
 export default function HeroSection() {
     const MainBoxSx = {
         backgroundImage: "url('/bg.png')", backgroundSize: "cover",
-        backgroundRepeat: "no-repeat", backgroundPosition: 'center', height: "100vh",
+        backgroundRepeat: "no-repeat", backgroundPosition: 'center', height: "75vh",
     }
     const ContainerSx = {
-        height: "100vh",
+        height: "75vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

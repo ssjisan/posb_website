@@ -3,9 +3,9 @@ import { Box, Modal, useMediaQuery } from '@mui/material';
 import "react-image-gallery/styles/css/image-gallery.css";
 
 //eslint-disable-next-line
-export default function AlbumView({ handleClose, open, selectedImages }) {
+export default function AlbumView({ handleClose, open, galleryImages }) {
     const forBelow767 = useMediaQuery("(max-width:767px)");
-
+    
     const style = {
         position: 'absolute',
         top: '50%',
@@ -27,7 +27,7 @@ export default function AlbumView({ handleClose, open, selectedImages }) {
             }}
         >
             <Box sx={style}>
-                <ImageGallery items={selectedImages} />
+                <ImageGallery items={galleryImages} />
             </Box>
         </Modal>
     )

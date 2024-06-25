@@ -18,7 +18,7 @@ export default function BigEventModal({ open, onClose }) {
 
   const loadEvents = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/events");
+      const { data } = await axios.get("https://posb-server.vercel.app/events");
       if (data.length > 0) {
         setLastEvent(data[data.length - 1]);
       }
@@ -26,6 +26,7 @@ export default function BigEventModal({ open, onClose }) {
       console.log("Check");
     }
   };
+  console.log(lastEvent);
   return (
     <Modal open={open} onClose={onClose}>
       <Box
