@@ -64,7 +64,7 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
       onClose={toggleDrawer}
       sx={DrawerSx}
     >
-      <Box sx={{height: "95vh", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+      <Box sx={{height: "90vh", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
         <Box sx={TopBarSx}>
           <Box sx={CloseButtonSx} onClick={handleDrawerClose}>
             <Close />

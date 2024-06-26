@@ -28,7 +28,7 @@ export default function Home() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-  
+
   return (
     <>
       <BigEventModal open={isModalOpen} onClose={handleCloseModal} />
