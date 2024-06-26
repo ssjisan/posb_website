@@ -47,7 +47,7 @@ export default function NewsSlider() {
       },
     ],
   };
-  
+
   const loadNotices = async () => {
     try {
       const { data } = await axios.get(
@@ -58,8 +58,9 @@ export default function NewsSlider() {
       console.log(err.message);
     }
   };
+  console.log(notices);
   return (
-    <div className="slider-container" >
+    <div className="slider-container">
       <Slider {...settings}>
         {notices.map((data) => {
           const isoDate = data.createdAt;
@@ -68,62 +69,59 @@ export default function NewsSlider() {
           const month = date.toLocaleString("en-US", { month: "short" });
 
           return (
-            <Link
-              key={data._id}
-              href={data.link}
-              target="_blank"
-            >
-              <Box
-                sx={{
-                  display: "flex !important",
-                  gap: "16px",
-                  p: "0px 24px",
-                  height: "86px",
-                  textDecoration:"none !important",
-                }}
-                
-              >
+            <>
+              <Link key={data._id} to={data.link} target="_blank" style={{textDecoration:"none", color:"inherit"}}>
                 <Box
                   sx={{
-                    width: "48px",
-                    height: "48px",
-                    background: "#114285",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "4px",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    display: "flex !important",
+                    gap: "16px",
+                    p: "0px 24px",
+                    height: "86px",
+                    textDecoration: "none !important",
                   }}
                 >
-                  <Typography
+                  <Box
                     sx={{
-                      color: "white",
-                      fontSize: "24px !important",
-                      fontWeight: "400 !important",
-                      lineHeight: "18px",
+                      width: "48px",
+                      height: "48px",
+                      background: "#114285",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
                   >
-                    {day}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "white",
-                      fontSize: "14px !important",
-                      fontWeight: "300 !important",
-                      lineHeight: "12px",
-                    }}
-                  >
-                    {month}
-                  </Typography>
+                    <Typography
+                      sx={{
+                        color: "white",
+                        fontSize: "24px !important",
+                        fontWeight: "400 !important",
+                        lineHeight: "18px",
+                      }}
+                    >
+                      {day}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: "white",
+                        fontSize: "14px !important",
+                        fontWeight: "300 !important",
+                        lineHeight: "12px",
+                      }}
+                    >
+                      {month}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="h4">{data.title}</Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      {data.description}
+                    </Typography>
+                  </Box>
                 </Box>
-                <Box>
-                  <Typography variant="h4">{data.title}</Typography>
-                  <Typography variant="body1" color="text.secondary">
-                    {data.description}
-                  </Typography>
-                </Box>
-              </Box>
-            </Link>
+              </Link>
+            </>
           );
         })}
       </Slider>

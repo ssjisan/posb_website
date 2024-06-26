@@ -68,7 +68,7 @@ export default function UpcomingEvents() {
             }}
           >
             <Typography variant="h6" sx={{ color: "#919EAB", fontStyle: "italic", textAlign: "center" }}>
-              Event data couldn't load properly
+              Event data couldn&lsquo;t load properly
               <br />Try again later.
             </Typography>
           </Box>
