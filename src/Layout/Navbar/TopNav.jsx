@@ -5,7 +5,8 @@ import { Symbolic } from "../../assets/Symbolic";
 import { Link, useLocation } from "react-router-dom";
 import MenuDrawer from "./MenuDrawer";
 import { useState } from "react";
-//eslint-disable-next-line
+import PropTypes from "prop-types"; // Import PropTypes
+
 export default function TopNav({ isScrolled }) {
   const { pathname } = useLocation();
 
@@ -28,11 +29,12 @@ export default function TopNav({ isScrolled }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
   return (
     <Box sx={NavSx}>
       <Box>
         {forBelow475 ? (
-          <Link to="/">
+          <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <Symbolic
               colorOne={
                 pathname === "/" ? (isScrolled ? "#114285" : "#fff") : "#114285"
@@ -43,7 +45,7 @@ export default function TopNav({ isScrolled }) {
             />
           </Link>
         ) : (
-          <Link to="/">
+          <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <Logo
               colorOne={
                 pathname === "/" ? (isScrolled ? "#114285" : "#fff") : "#114285"
@@ -65,7 +67,12 @@ export default function TopNav({ isScrolled }) {
         </IconButton>
       ) : (
         <Box sx={{ display: "flex", gap: "24px", alignItems: "center" }}>
-          <a aria-label="Chat on WhatsApp" href="https://wa.me/+8801787863140" target="_blank" style={{textDecoration:"none"}}>
+          <a
+            aria-label="Chat on WhatsApp"
+            href="https://wa.me/+8801787863140"
+            target="_blank"
+            style={{ textDecoration: "none" }}
+          >
             <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <Whatsapp
                 color={
@@ -91,23 +98,36 @@ export default function TopNav({ isScrolled }) {
             </Box>
           </a>
           <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <Phone
-              color={
-                pathname === "/" ? (isScrolled ? "#0D0A25" : "#fff") : "#0D0A25"
-              }
-            />
-            <Typography
-              sx={{
-                color:
-                  pathname === "/"
-                    ? isScrolled
-                      ? "#0D0A25"
-                      : "#fff"
-                    : "#0D0A25",
-              }}
+            <a
+              aria-label="Call on Phone"
+              href="tel:+8801740559555"
+              target="_blank"
+              style={{ textDecoration: "none" }}
             >
-              +8801675893967
-            </Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <Phone
+                  color={
+                    pathname === "/"
+                      ? isScrolled
+                        ? "#0D0A25"
+                        : "#fff"
+                      : "#0D0A25"
+                  }
+                />
+                <Typography
+                  sx={{
+                    color:
+                      pathname === "/"
+                        ? isScrolled
+                          ? "#0D0A25"
+                          : "#fff"
+                        : "#0D0A25",
+                  }}
+                >
+                  +8801740559555
+                </Typography>
+              </Box>
+            </a>
           </Box>
         </Box>
       )}
@@ -119,3 +139,7 @@ export default function TopNav({ isScrolled }) {
     </Box>
   );
 }
+
+TopNav.propTypes = {
+  isScrolled: PropTypes.bool.isRequired, // PropTypes validation for isScrolled prop
+};

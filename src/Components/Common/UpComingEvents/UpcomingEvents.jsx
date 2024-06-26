@@ -2,7 +2,6 @@ import { Box, Container, useMediaQuery } from "@mui/material";
 import HeaderSection from "./HeaderSection";
 import EventsSlider from "./EventsSlider";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import axios from "axios";
 
 export default function UpcomingEvents() {
@@ -10,6 +9,8 @@ export default function UpcomingEvents() {
   const [activeIndex, setActiveIndex] = useState(0); // Initialize active index state
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true); // Initialize loading state
+  const [error, setError] = useState(false);
+
   // Load Event
   useEffect(() => {
     loadEvents();
@@ -17,14 +18,16 @@ export default function UpcomingEvents() {
 
   const loadEvents = async () => {
     try {
-      const { data } = await axios.get("https://posb-server.vercel.app/events");
-      setEvents(data);
+      const response = await axios.get('https://posb-server.vercel.app/events');
+      setEvents(response.data);
       setLoading(false);
-    } catch (err) {
-      toast.error("Event loading problem");
+    } catch (error) {
       setLoading(false);
+      setError(true);
     }
   };
+
+
   return (
     <>
       {events.length > 1 && (
@@ -47,6 +50,7 @@ export default function UpcomingEvents() {
                 setActiveIndex={setActiveIndex}
                 events={events}
                 activeIndex={activeIndex}
+                error={error}
               />
           </Container>
         </Box>
