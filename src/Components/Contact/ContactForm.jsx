@@ -1,12 +1,13 @@
-import { Box, Grid, Typography, TextField ,Button,useMediaQuery } from "@mui/material";
+import { Box, Grid, Typography, TextField ,Button,useMediaQuery, Container } from "@mui/material";
 
 export default function ContactForm() {
     const forBelow767 = useMediaQuery("(max-width:767px)");
 
     return (
-        <Box sx={{ p: forBelow767 ? "100px 0px 40px 0px" : "210px 0px 64px 0px" }}>
+        <Container>
+            <Box sx={{ p: forBelow767 ? "100px 0px 40px 0px" : "210px 0px 64px 0px" }}>
             <Grid container sx={{ justifyContent: "center" }}>
-                <Grid item xs={12} sm={8} md={8} lg={4}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
                     <Box sx={{ width: "100%", p: "32px 24px", borderRadius: "20px", border: "1px solid  rgba(145,142,175,0.32)", display: "flex", flexDirection: "column", gap: "24px", justifyContent: "center", alignItems: "center" ,boxShadow: "0 8px 32px rgba(0, 0, 0, 0.06)"}}>
                         <Box sx={{ textAlign: "center", display: "flex", gap: "24px", flexDirection: "column", justifyContent: "center", width: "80%" }}>
                             <Typography variant="h3">Get in touch</Typography>
@@ -24,5 +25,6 @@ export default function ContactForm() {
                 </Grid>
             </Grid>
         </Box>
+        </Container>
     )
 }

@@ -82,6 +82,7 @@ export default function TopNav({ isScrolled }) {
                       : "#fff"
                     : "#0D0A25"
                 }
+                size="24px"
               />
               <Typography
                 sx={{

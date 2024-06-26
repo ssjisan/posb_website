@@ -1,4 +1,4 @@
-import { Box, Container, useMediaQuery } from "@mui/material";
+import { Box, Container, useMediaQuery, Typography, Skeleton } from "@mui/material";
 import HeaderSection from "./HeaderSection";
 import EventsSlider from "./EventsSlider";
 import { useEffect, useState } from "react";
@@ -27,34 +27,61 @@ export default function UpcomingEvents() {
     }
   };
 
-
   return (
-    <>
-      {events.length > 1 && (
-        <Box
-          sx={{
-            p: forBelow767 ? "40px 0px" : "64px 0px",
-            background: "#FAFAFA",
-          }}
-        >
-          <Container
+    <Box
+      sx={{
+        p: forBelow767 ? "40px 0px" : "64px 0px",
+        background: "#FAFAFA",
+      }}
+    >
+      <Container
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: forBelow767 ? "40px" : "64px",
+        }}
+      >
+        <HeaderSection />
+        {loading ? (
+          <Box>
+            {/* Skeleton for Slider */}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "24px",
+              }}
+            >
+              <Skeleton variant="rectangular" width="100%" height="240px" sx={{ borderRadius: "16px" }} />
+              <Skeleton variant="text" width="80%" height="32px" />
+              <Skeleton variant="text" width="60%" />
+              <Skeleton variant="text" width="80%" />
+            </Box>
+          </Box>
+        ) : error ? (
+          <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
-              gap: forBelow767 ? "40px" : "64px",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "240px",
             }}
           >
-            <HeaderSection />
-            <EventsSlider
-                loading={loading}
-                setActiveIndex={setActiveIndex}
-                events={events}
-                activeIndex={activeIndex}
-                error={error}
-              />
-          </Container>
-        </Box>
-      )}
-    </>
+            <Typography variant="h6" sx={{ color: "#919EAB", fontStyle: "italic", textAlign: "center" }}>
+              Event data couldn't load properly
+              <br />Try again later.
+            </Typography>
+          </Box>
+        ) : (
+          <EventsSlider
+            loading={loading}
+            setActiveIndex={setActiveIndex}
+            events={events}
+            activeIndex={activeIndex}
+            error={error}
+          />
+        )}
+      </Container>
+    </Box>
   );
 }

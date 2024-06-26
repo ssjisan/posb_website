@@ -9,7 +9,7 @@ export default function EventsSlider({
   setActiveIndex,
   events,
   activeIndex,
-  error
+  error,
 }) {
   const DetailsSx = {
     width: "100%",
@@ -65,7 +65,6 @@ export default function EventsSlider({
     ],
   };
 
-
   return (
     <div className="slider-container">
       {loading ? (
@@ -92,15 +91,30 @@ export default function EventsSlider({
                 <Skeleton variant="text" width="80%" height="32px" />
                 <Box sx={DetailsSx}>
                   <Box sx={{ ...PointSx, alignItems: "center" }}>
-                    <Skeleton variant="circular" width="24px" height="24px" />
+                    <Skeleton
+                      variant="circular"
+                      width="24px"
+                      height="24px"
+                      sx={{ borderRadius: "50%" }}
+                    />
                     <Skeleton variant="text" width="60%" />
                   </Box>
                   <Box sx={{ ...PointSx, alignItems: "center" }}>
-                    <Skeleton variant="circular" width="24px" height="24px" />
+                    <Skeleton
+                      variant="circular"
+                      width="24px"
+                      height="24px"
+                      sx={{ borderRadius: "50%" }}
+                    />
                     <Skeleton variant="text" width="60%" />
                   </Box>
                   <Box sx={PointSx}>
-                    <Skeleton variant="circular" width="24px" height="24px" />
+                    <Skeleton
+                      variant="circular"
+                      width="24px"
+                      height="24px"
+                      sx={{ borderRadius: "50%" }}
+                    />
                     <Skeleton variant="text" width="80%" />
                   </Box>
                 </Box>
@@ -117,9 +131,13 @@ export default function EventsSlider({
             height: "240px",
           }}
         >
-          <Typography variant="h6" sx={{color:"#919EAB", fontStyle:"italic", textAlign:"center"}}>
+          <Typography
+            variant="h6"
+            sx={{ color: "#919EAB", fontStyle: "italic", textAlign: "center" }}
+          >
             Event data couldn&apos;t load properly
-            <br/>Try again later.
+            <br />
+            Try again later.
           </Typography>
         </Box>
       ) : (
@@ -209,7 +227,11 @@ export default function EventsSlider({
 EventsSlider.propTypes = {
   loading: PropTypes.bool.isRequired,
   setActiveIndex: PropTypes.func.isRequired,
-  events: PropTypes.array.isRequired,
+  events: PropTypes.array,
   activeIndex: PropTypes.number.isRequired,
-  error:PropTypes.string.isRequired
+  error: PropTypes.string, // PropTypes for error changed to string instead of required
+};
+
+EventsSlider.defaultProps = {
+  events: [], // Default empty array for events if not provided
 };
