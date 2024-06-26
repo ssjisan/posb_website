@@ -4,7 +4,6 @@ import EventsSlider from "./EventsSlider";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import EventGrid from "./EventGrid";
 
 export default function UpcomingEvents() {
   const forBelow767 = useMediaQuery("(max-width:767px)");
@@ -43,16 +42,12 @@ export default function UpcomingEvents() {
             }}
           >
             <HeaderSection />
-            {events.length > 2 ? (
-              <EventsSlider
+            <EventsSlider
                 loading={loading}
                 setActiveIndex={setActiveIndex}
                 events={events}
                 activeIndex={activeIndex}
               />
-            ) : (
-              <EventGrid events={events} />
-            )}
           </Container>
         </Box>
       )}
