@@ -31,7 +31,7 @@ export default function ContactForm() {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/upload-message', formData);
+            const response = await axios.post('https://posb-server.vercel.app/upload-message', formData);
             console.log("Form submitted successfully:", response.data);
             toast.success("We received you message.")
             // Handle success or any other actions after successful submission

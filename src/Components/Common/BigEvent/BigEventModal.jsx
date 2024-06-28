@@ -13,6 +13,7 @@ import { Close } from "../../../assets/Icons";
 export default function BigEventModal({ open, onClose }) {
   const imgRef = useRef(null); // Ref to access the image element
   const [lastEvent, setLastEvent] = useState(null);
+  // eslint-disable-next-line
   const [imageLoaded, setImageLoaded] = useState(false); // State for image loaded
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal open
 

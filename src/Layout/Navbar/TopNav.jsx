@@ -69,7 +69,7 @@ export default function TopNav({ isScrolled }) {
         <Box sx={{ display: "flex", gap: "24px", alignItems: "center" }}>
           <a
             aria-label="Chat on WhatsApp"
-            href="https://wa.me/+8801787863140"
+            href="https://wa.me/+8801534919618"
             target="_blank"
             style={{ textDecoration: "none" }}
           >
@@ -94,7 +94,7 @@ export default function TopNav({ isScrolled }) {
                       : "#0D0A25",
                 }}
               >
-                +8801675893967
+                +8801534919618
               </Typography>
             </Box>
           </a>
