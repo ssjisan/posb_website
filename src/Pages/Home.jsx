@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import BigEventModal from "../Components/Common/BigEvent/BigEventModal";
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const lastShown = localStorage.getItem("modalLastShown");

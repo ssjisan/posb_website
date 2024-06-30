@@ -106,7 +106,7 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
         >
           <a
             aria-label="Chat on WhatsApp"
-            href="https://wa.me/+8801787863140"
+            href="https://wa.me/+8801534919618"
             target="_blank"
             style={{ textDecoration: "none",width:"100%" }}
           >
@@ -127,8 +127,8 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
                   color:"#0D0A25",
                 }}
               >
-                +8801675893967
-              </Typography>
+                +8801534919618
+                </Typography>
             </Box>
           </a>
           <Box
