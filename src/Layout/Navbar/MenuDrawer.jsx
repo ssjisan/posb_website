@@ -41,7 +41,7 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
     flexDirection: "column",
     alignItems: "flex-start",
     m: "40px 16px",
-    height:"100vh",
+    height: "100vh",
   };
   const MenuButtonSx = {
     display: "flex",
@@ -64,7 +64,14 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
       onClose={toggleDrawer}
       sx={DrawerSx}
     >
-      <Box sx={{height: "90vh", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+      <Box
+        sx={{
+          height: "90vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         <Box sx={TopBarSx}>
           <Box sx={CloseButtonSx} onClick={handleDrawerClose}>
             <Close />
@@ -73,23 +80,21 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
         <Box sx={MenuSx}>
           {main.map((data) => {
             return (
-              <>
-                <Box key={data.id} onClick={goToTop}>
-                  <Link to={data.link} style={linkStyle}>
-                    <Box
-                      sx={{
-                        ...MenuButtonSx,
-                        borderBottom:
-                          pathname === data.link
-                            ? "2px solid #0D0A25"
-                            : "2px solid transparent",
-                      }}
-                    >
-                      <Typography variant="h4">{data.title}</Typography>
-                    </Box>
-                  </Link>
-                </Box>
-              </>
+              <Box key={data.id} onClick={goToTop}>
+                <Link to={data.link} style={linkStyle}>
+                  <Box
+                    sx={{
+                      ...MenuButtonSx,
+                      borderBottom:
+                        pathname === data.link
+                          ? "2px solid #0D0A25"
+                          : "2px solid transparent",
+                    }}
+                  >
+                    <Typography variant="h4">{data.title}</Typography>
+                  </Box>
+                </Link>
+              </Box>
             );
           })}
         </Box>
@@ -97,7 +102,7 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
           sx={{
             display: "flex",
             gap: "16px",
-            p:"16px",
+            p: "16px",
             alignItems: "flex-start",
             flexDirection: "column",
             mt: "64px",
@@ -108,7 +113,7 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
             aria-label="Chat on WhatsApp"
             href="https://wa.me/+8801534919618"
             target="_blank"
-            style={{ textDecoration: "none",width:"100%" }}
+            style={{ textDecoration: "none", width: "100%" }}
           >
             <Box
               sx={{
@@ -116,51 +121,53 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
                 alignItems: "center",
                 gap: "8px",
                 backgroundColor: "#F2F5FF",
-                p:"8px 12px",
-                borderRadius:"8px"
+                p: "8px 12px",
+                borderRadius: "8px",
               }}
             >
               <Whatsapp color={"#0D0A25"} size={"24px"} />
               <Typography
                 sx={{
-                    fontSize:"16px",
-                  color:"#0D0A25",
+                  fontSize: "16px",
+                  color: "#0D0A25",
                 }}
               >
                 +8801534919618
-                </Typography>
+              </Typography>
             </Box>
           </a>
           <Box
-          sx={{
-            display: "flex",
-            gap: "24px",
-            alignItems: "flex-start",
-            flexDirection: "column",
-            width: "100%",
-          }}
-        >
+            sx={{
+              display: "flex",
+              gap: "24px",
+              alignItems: "flex-start",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
             <a
               aria-label="Call on Phone"
               href="tel:+8801740559555"
               target="_blank"
-              style={{ textDecoration: "none", width:"100%"}}
+              style={{ textDecoration: "none", width: "100%" }}
             >
-              <Box sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                backgroundColor: "#F2F5FF",
-                p:"8px 12px",
-                borderRadius:"8px"
-              }}>
-                <Phone color={"#0D0A25"} />
-                <Typography
+              <Box
                 sx={{
-                    fontSize:"16px",
-                  color:"#0D0A25",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  backgroundColor: "#F2F5FF",
+                  p: "8px 12px",
+                  borderRadius: "8px",
                 }}
               >
+                <Phone color={"#0D0A25"} size={"24px"}/>
+                <Typography
+                  sx={{
+                    fontSize: "16px",
+                    color: "#0D0A25",
+                  }}
+                >
                   +8801740559555
                 </Typography>
               </Box>

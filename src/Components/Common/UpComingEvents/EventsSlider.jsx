@@ -150,7 +150,7 @@ export default function EventsSlider({
                 flexDirection: "column",
                 p: "24px 12px",
               }}
-              key={data.id}
+              key={data._id}
             >
               <Box
                 sx={{

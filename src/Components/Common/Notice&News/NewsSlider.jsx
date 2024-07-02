@@ -30,6 +30,14 @@ export default function NewsSlider() {
         },
       },
       {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
@@ -58,7 +66,6 @@ export default function NewsSlider() {
       console.log(err.message);
     }
   };
-  console.log(notices);
   return (
     <div className="slider-container">
       <Slider {...settings}>
@@ -69,8 +76,12 @@ export default function NewsSlider() {
           const month = date.toLocaleString("en-US", { month: "short" });
 
           return (
-            <>
-              <Link key={data._id} to={data.link} target="_blank" style={{textDecoration:"none", color:"inherit"}}>
+            <Box key={data._id}>
+              <Link
+                to={data.link}
+                target="_blank"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
                 <Box
                   sx={{
                     display: "flex !important",
@@ -121,7 +132,7 @@ export default function NewsSlider() {
                   </Box>
                 </Box>
               </Link>
-            </>
+            </Box>
           );
         })}
       </Slider>
