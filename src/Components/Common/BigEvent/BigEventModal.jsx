@@ -92,8 +92,8 @@ export default function BigEventModal({ open, onClose }) {
           <Box
             sx={{
               position: 'absolute',
-              top: 24,
-              right: 32,
+              top: 8,
+              right: 20,
             }}
           >
             <IconButton
@@ -101,6 +101,14 @@ export default function BigEventModal({ open, onClose }) {
               color="inherit"
               onClick={handleClose}
               aria-label="close"
+              sx={{
+                border: '1px solid black', // Add black border
+
+                backgroundColor: 'white', // Set button background to white
+                '&:hover': {
+                  backgroundColor: '#f0f0f0', // Slightly darker on hover
+                },
+              }}
             >
               <Close />
             </IconButton>

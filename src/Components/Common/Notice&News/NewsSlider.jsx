@@ -59,7 +59,7 @@ export default function NewsSlider() {
   const loadNotices = async () => {
     try {
       const { data } = await axios.get(
-        "https://posb-server.vercel.app/notices"
+        `${process.env.REACT_APP_SERVER_API}/notices`
       );
       setNotices(data);
     } catch (err) {

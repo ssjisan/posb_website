@@ -41,9 +41,9 @@ export const typography = {
     ...responsiveFontSizes({
       sm: 32,
       smLineHeight: "120%",
-      md: 56,
+      md: 48,
       mdLineHeight: "120%",
-      lg: 56,
+      lg: 52,
       lgLineHeight: "120%",
     }),
   },

@@ -61,8 +61,9 @@ export default function ExecutiveSlider() {
   const loadCommittees = async () => {
     try {
       const { data } = await axios.get(
-        "https://posb-server.vercel.app/executive-committee"
+        `${process.env.REACT_APP_SERVER_API}/executive-committee`
       );
+
       setCommittees([data[0]]);
       setLoading(false);
       setError(false);
@@ -76,7 +77,12 @@ export default function ExecutiveSlider() {
   return (
     <div className="slider-container">
       {loading ? (
-        <Slider {...settings} ref={(slider) => { sliderRef = slider; }}>
+        <Slider
+          {...settings}
+          ref={(slider) => {
+            sliderRef = slider;
+          }}
+        >
           {Array.from(new Array(3)).map((_, index) => (
             <Box
               sx={{
@@ -120,13 +126,22 @@ export default function ExecutiveSlider() {
             height: "200px",
           }}
         >
-          <Typography variant="h6" sx={{color:"#919EAB", fontStyle:"italic", textAlign:"center"}}>
+          <Typography
+            variant="h6"
+            sx={{ color: "#919EAB", fontStyle: "italic", textAlign: "center" }}
+          >
             Committee data could not load properly.
-            <br/>Try Again Later.
+            <br />
+            Try Again Later.
           </Typography>
         </Box>
       ) : (
-        <Slider {...settings} ref={(slider) => { sliderRef = slider; }}>
+        <Slider
+          {...settings}
+          ref={(slider) => {
+            sliderRef = slider;
+          }}
+        >
           {committees.map((committee) => {
             return committee.members.map((memberData) => {
               const { member, position } = memberData;
@@ -153,7 +168,7 @@ export default function ExecutiveSlider() {
                       alt={member.name}
                       width="100%"
                       height="100%"
-                      style={{ objectFit: "cover"}}
+                      style={{ objectFit: "cover" }}
                     />
                   </Box>
                   <Box

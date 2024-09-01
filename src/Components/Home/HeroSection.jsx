@@ -10,7 +10,7 @@ export default function HeroSection() {
     height: "80vh",
   };
   const ContainerSx = {
-    height: "80vh",
+    height: "100vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -37,8 +37,10 @@ export default function HeroSection() {
             in care
           </Typography>
           <Typography
-            variant="h3"
+                      variant="h4"
             sx={{
+              width:"100%",
+              maxWidth:"720px",
               textAlign: "center",
               color: "#fff",
               fontWeight: "300 !important",

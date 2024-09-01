@@ -48,7 +48,7 @@ export const Whatsapp = ({ color, size }) => {
   );
 };
 
-export const Phone = ({ color, size}) => {
+export const Phone = ({ color, size }) => {
   return (
     <div
       style={{
@@ -422,6 +422,31 @@ export const Call = () => {
     </svg>
   );
 };
+
+export const Plus = ({ color, size }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10 3V17"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M3 10H17"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};
 Menu.propTypes = {
   color: PropTypes.string.isRequired,
 };
@@ -430,6 +455,10 @@ Whatsapp.propTypes = {
   size: PropTypes.string.isRequired,
 };
 Phone.propTypes = {
+  color: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
+};
+Plus.propTypes = {
   color: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
 };

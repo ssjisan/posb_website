@@ -1,6 +1,9 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { Phone, Whatsapp } from "../../assets/Icons";
 import PropTypes from "prop-types"; // Import PropTypes
+import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 export default function TopNav() {
   const forBelow767 = useMediaQuery("(max-width:767px)");
@@ -14,6 +17,26 @@ export default function TopNav() {
     alignItems: "center",
     borderBottom: "1px solid rgba(145,142,175,0.32)",
   };
+  const [phone, setPhone] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+
+  useEffect(() => {
+    // Fetch existing contact info
+    const fetchContactInfo = async () => {
+      try {
+        const { data } = await axios.get(`${process.env.REACT_APP_SERVER_API}/contact-info`); // Fetch data from the endpoint
+        const { phoneNumber, whatsapp } = data;
+        setPhone(phoneNumber); // Set phone data or empty string if undefined
+        setWhatsapp(whatsapp); // Set WhatsApp data or empty string if undefined
+      } catch (err) {
+        toast.error("Failed to fetch contact information"); // Show error toast if fetching fails
+      }
+    };
+
+    fetchContactInfo(); // Call the fetch function
+  }, []); // Empty dependency array ensures this effect runs once on mount
+
+  console.log("Phone", phone, whatsapp);
 
   return (
     <>
@@ -22,25 +45,25 @@ export default function TopNav() {
           <Box sx={{ display: "flex", gap: "24px", alignItems: "center" }}>
             <a
               aria-label="Chat on WhatsApp"
-              href="https://wa.me/+8801534919618"
+              href={`https://wa.me/+${whatsapp}`}
               target="_blank"
               style={{ textDecoration: "none" }}
             >
               <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 <Whatsapp color={"#FFF"} size="20px" />
-                <Typography sx={{ color: "#FFF" }}>+8801534919618</Typography>
+                <Typography sx={{ color: "#FFF" }}>+{whatsapp}</Typography>
               </Box>
             </a>
             <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <a
                 aria-label="Call on Phone"
-                href="tel:+8801740559555"
+                href={`tel:+${phone}`}
                 target="_blank"
                 style={{ textDecoration: "none" }}
               >
                 <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <Phone size="20px" color={"#FFF"} />
-                  <Typography sx={{ color: "#FFF" }}>+8801740559555</Typography>
+                  <Typography sx={{ color: "#FFF" }}>+{phone}</Typography>
                 </Box>
               </a>
             </Box>

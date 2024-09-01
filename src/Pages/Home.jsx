@@ -10,6 +10,7 @@ import ExecutiveMember from "../Components/Common/ExecutiveMember/ExecutiveMembe
 import { useEffect, useState } from "react";
 import BigEventModal from "../Components/Common/BigEvent/BigEventModal";
 import Navbar from "../Layout/Navbar/Navbar";
+import axios from "axios";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +29,20 @@ export default function Home() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+  const [events, setEvents] = useState([]);
+  // Load Event
+  useEffect(() => {
+    loadEvents();
+  }, []);
 
+  const loadEvents = async () => {
+    try {
+      const response = await axios.get('https://posb-server.vercel.app/events');
+      setEvents(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <BigEventModal open={isModalOpen} onClose={handleCloseModal} />
@@ -37,7 +51,7 @@ export default function Home() {
       <OurJourney />
       <ExecutiveMember />
       <LatestEvent />
-      <UpcomingEvents />
+      {events.length > 1 && <UpcomingEvents />}
       <PresidentSpeech />
       <EventNews />
       <Location />

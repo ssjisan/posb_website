@@ -18,7 +18,9 @@ export default function LatestEvent() {
 
   const loadEvents = async () => {
     try {
-      const { data } = await axios.get("https://posb-server.vercel.app/events");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER_API}/events`
+      );
       if (data.length > 0) {
         setLastEvent(data[0]);
       }
@@ -67,7 +69,7 @@ export default function LatestEvent() {
                 <Skeleton variant="rectangular" width="100%" height="100%" />
               ) : (
                 <img
-                  src={`https://posb-server.vercel.app/event/image/${lastEvent?._id}`}
+                  src={`${process.env.REACT_APP_SERVER_API}/event/image/${lastEvent?._id}`}
                   alt="Event Image"
                   width="100%"
                   height="100%"

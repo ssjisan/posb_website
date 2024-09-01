@@ -46,7 +46,9 @@ export default function Albums() {
 
   const loadAlbums = async () => {
     try {
-      const { data } = await axios.get("https://posb-server.vercel.app/albums");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER_API}/albums`
+      );
       setAlbums(data);
       setLoading(false);
     } catch (err) {
