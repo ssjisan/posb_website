@@ -6,6 +6,7 @@ import Gallerys from "../Pages/Gallery";
 import Member from "../Pages/Member";
 import { Toaster } from "react-hot-toast";
 import Journal from "../Pages/Journal";
+import Forms from "../Pages/Forms";
 
 export default function MainRoute() {
   return (
@@ -18,6 +19,7 @@ export default function MainRoute() {
         <Route path="contact" element={<Contact />} />
         <Route path="members" element={<Member />} />
         <Route path="journal" element={<Journal />} />
+        <Route path="forms" element={<Forms />} />
       </Routes>
     </>
   );

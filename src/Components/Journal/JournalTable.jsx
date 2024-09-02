@@ -5,37 +5,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  tableCellClasses,
   TableCell,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function JournalTable() {
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
-
-
   const [journals, setJournals] = useState([]);
   useEffect(() => {
     loadJournals();
@@ -54,30 +31,81 @@ export default function JournalTable() {
   return (
     <Grid container>
       <Grid item xs={12} sm={12} md={12} lg={12}>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableContainer
+          component={Paper}
+          sx={{
+            boxShadow: "none",
+            borderRadius: "8px",
+            border: "1px solid rgba(224, 224, 224, 1)",
+          }}
+        >
+          <Table sx={{ minWidth: 650 }}>
             <TableHead>
               <TableRow>
-                <StyledTableCell>Title</StyledTableCell>
-                <StyledTableCell align="left">Publish Date</StyledTableCell>
-                <StyledTableCell align="left">Preview</StyledTableCell>
+                <TableCell
+                  sx={{
+                    width: "72px",
+                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                  }}
+                >
+                  No
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                >
+                  Title
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{
+                    width: "200px",
+                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                  }}
+                >
+                  Publish Date
+                </TableCell>
+                <TableCell align="left" sx={{ width: "120px" }}>
+                  Preview
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {journals.map((row) => (
-                <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
+              {journals.map((row, i) => (
+                <TableRow key={row.name}>
+                  <TableCell
+                    sx={{
+                      width: "72px",
+                      borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    }}
+                  >
+                    {i + 1}
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                  >
                     {row.title}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{
+                      borderRight: "1px solid rgba(224, 224, 224, 1)",
+                      width: "200px",
+                    }}
+                  >
                     {new Date(row.publishedDate).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
                     })}
-                  </StyledTableCell>
-                  <StyledTableCell align="left"><a href={row.link} target="_blank">Click Here</a></StyledTableCell>
-                </StyledTableRow>
+                  </TableCell>
+                  <TableCell align="left" sx={{ width: "120px" }}>
+                    <a href={row.link} target="_blank">
+                      Click Here
+                    </a>
+                  </TableCell>
+                </TableRow>
               ))}
             </TableBody>
           </Table>
