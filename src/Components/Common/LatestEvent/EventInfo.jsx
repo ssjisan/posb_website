@@ -1,9 +1,16 @@
-import { Box, Typography, useMediaQuery, Skeleton } from "@mui/material";
+import {
+  Box,
+  Typography,
+  useMediaQuery,
+  Skeleton,
+  Button,
+  Stack,
+} from "@mui/material";
 import { Calender, Clock, Location } from "../../../assets/Icons";
 import { format } from "date-fns";
 import PropTypes from "prop-types";
 
-export default function EventInfo({ lastEvent, loading }) {
+export default function EventInfo({ lastEvent, loading, onEventDetailsClick }) {
   const forBelow599 = useMediaQuery("(max-width:599px)");
 
   const DetailsSx = {
@@ -73,6 +80,14 @@ export default function EventInfo({ lastEvent, loading }) {
               </Box>
               <Typography variant="h6">{lastEvent.location}</Typography>
             </Box>
+            <Stack direction="row" gap="16px" sx={{ mt: "24px" }}>
+              <Button variant="outlined" onClick={onEventDetailsClick}>
+                Event Details
+              </Button>
+              {lastEvent.registrationLink && !lastEvent.linkExpire && (
+                <Button variant="contained">Registration</Button>
+              )}
+            </Stack>
           </Box>
         </>
       )}
@@ -86,6 +101,9 @@ EventInfo.propTypes = {
     eventDate: PropTypes.string,
     eventTime: PropTypes.string,
     location: PropTypes.string,
+    registrationLink: PropTypes.string,
+    linkExpire: PropTypes.bool, // Corrected to bool
   }),
-  loading: PropTypes.bool.isRequired, // Add prop type for loading
+  loading: PropTypes.bool.isRequired,
+  onEventDetailsClick: PropTypes.func.isRequired, // Prop for the event details click handler
 };

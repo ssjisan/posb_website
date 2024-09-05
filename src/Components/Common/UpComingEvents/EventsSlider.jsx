@@ -1,8 +1,10 @@
-import { Box, Typography, Skeleton } from "@mui/material";
+import { Box, Typography, Skeleton, Button } from "@mui/material";
 import Slider from "react-slick";
 import { Calender, Clock, Location } from "../../../assets/Icons";
 import { format } from "date-fns";
 import PropTypes from "prop-types";
+import { useState } from "react";
+import EventDrawer from "../../Events/EventDrawer";
 
 export default function EventsSlider({
   loading,
@@ -63,6 +65,18 @@ export default function EventsSlider({
         },
       },
     ],
+  };
+
+  const [open, setOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+  const handleEventDetailsClick = (eventData) => {
+    setSelectedEvent(eventData); // Set the selected event
+    toggleDrawer(true)(); // Open the drawer
   };
 
   return (
@@ -171,7 +185,25 @@ export default function EventsSlider({
               <Box
                 sx={{ display: "flex", flexDirection: "column", gap: "24px" }}
               >
-                <Typography variant="h4">{data.name}</Typography>
+                <Box
+                  sx={{
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    width: "100%",
+                  }}
+                >
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {data.name}
+                  </Typography>
+                </Box>
                 <Box sx={DetailsSx}>
                   <Box sx={{ ...PointSx, alignItems: "center" }}>
                     <Box sx={IconBoxSx}>
@@ -194,6 +226,7 @@ export default function EventsSlider({
                     <Typography variant="body1">{data.location}</Typography>
                   </Box>
                 </Box>
+                <Button onClick={() => handleEventDetailsClick(data)}>Event Details</Button>
               </Box>
             </Box>
           ))}
@@ -220,6 +253,7 @@ export default function EventsSlider({
           ></Box>
         ))}
       </Box>
+      <EventDrawer open={open} toggleDrawer={toggleDrawer} eventData={selectedEvent}/>
     </div>
   );
 }
