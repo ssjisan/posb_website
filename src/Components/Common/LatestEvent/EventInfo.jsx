@@ -85,7 +85,7 @@ export default function EventInfo({ lastEvent, loading, onEventDetailsClick }) {
                 Event Details
               </Button>
               {lastEvent.registrationLink && !lastEvent.linkExpire && (
-                <Button variant="contained">Registration</Button>
+                <Button variant="contained" href={lastEvent.registrationLink}>Registration</Button>
               )}
             </Stack>
           </Box>

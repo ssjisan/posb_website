@@ -21,8 +21,8 @@ const main = [
   },
   {
     id: 5,
-    title: "Journal",
-    link: "/journal",
+    title: "Link",
+    link: "/link",
   },
   {
     id: 6,

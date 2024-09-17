@@ -18,7 +18,7 @@ export default function MainRoute() {
         <Route path="gallery" element={<Gallerys />} />
         <Route path="contact" element={<Contact />} />
         <Route path="members" element={<Member />} />
-        <Route path="journal" element={<Journal />} />
+        <Route path="link" element={<Journal />} />
         <Route path="forms" element={<Forms />} />
       </Routes>
     </>
