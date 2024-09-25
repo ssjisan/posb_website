@@ -21,11 +21,11 @@ export default function JournalTable() {
   const loadJournals = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/journals`
+        `${process.env.REACT_APP_SERVER_API}/links`
       );
       setJournals(data);
     } catch (err) {
-      toast.error("Journals can't load");
+      toast.error("Links can't load");
     }
   };
   return (

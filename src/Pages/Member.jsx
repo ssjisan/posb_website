@@ -9,8 +9,8 @@ export default function Member() {
     return (
         <>
             <Navbar />
-            <OurJourney />
             <Ourmember />
+            <OurJourney />
             <PresidentSpeech />
             <Footer />
         </>

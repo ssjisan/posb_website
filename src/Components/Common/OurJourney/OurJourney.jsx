@@ -9,9 +9,7 @@ export default function OurJourney() {
 
     return (
         <Box sx={{
-            p: pathname === "/members"
-                ? (forBelow767 ? "100px 0px 40px 0px" : "210px 0px 64px 0px")
-                : (forBelow767 ? "40px 0px" : "64px 0px")
+            p: "40px 0px"
             , background: pathname === "/upcoming_events" ? "#FFF" : "#FAFAFA"
         }}>
             <Container sx={{ display: "flex", flexDirection: "column", gap: forBelow767 ? "40px" : "64px" }}>
