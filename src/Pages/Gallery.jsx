@@ -21,7 +21,6 @@ export default function Gallerys() {
       console.log(error);
     }
   };
-  console.log(events.length);
   
   return (
     <>

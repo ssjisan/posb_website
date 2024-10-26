@@ -28,8 +28,8 @@ export default function Albums() {
   const handleOpen = (images) => {
     if (images && images.length > 0) {
       const formattedImages = images.map((image) => ({
-        original: image.url,
-        thumbnail: image.url,
+        original: image.src,
+        thumbnail: image.src,
       }));
       setSelectedImages(formattedImages); // Set the selected images array in state
       setOpen(true); // Open the modal
@@ -56,6 +56,7 @@ export default function Albums() {
       setLoading(false);
     }
   };
+console.log(albums);
 
   const handleImageLoad = (albumId) => {
     setImageLoading((prev) => ({ ...prev, [albumId]: false }));
@@ -128,7 +129,7 @@ export default function Albums() {
                 )}
                 {data.images && data.images.length > 0 ? (
                   <img
-                    src={data.images[0].url}
+                    src={data.images[0].src}
                     alt={data.name}
                     width="100%"
                     height="100%"

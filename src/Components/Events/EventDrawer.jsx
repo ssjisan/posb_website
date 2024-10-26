@@ -19,7 +19,6 @@ export default function EventDrawer({ toggleDrawer, open, eventData }) {
     display: "flex",
     gap: "16px",
   };
-  console.log(eventData);
 
   const DrawerList = (
     <Box sx={{ width: 360 }} role="presentation" onClick={toggleDrawer(false)}>

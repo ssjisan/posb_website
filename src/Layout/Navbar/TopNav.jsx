@@ -36,7 +36,6 @@ export default function TopNav() {
     fetchContactInfo(); // Call the fetch function
   }, []); // Empty dependency array ensures this effect runs once on mount
 
-  console.log("Phone", phone, whatsapp);
 
   return (
     <>
