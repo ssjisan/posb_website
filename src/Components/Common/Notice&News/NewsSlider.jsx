@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function NewsSlider() {
   const [activeIndex, setActiveIndex] = useState(0); // Initialize active index state
@@ -63,7 +64,7 @@ export default function NewsSlider() {
       );
       setNotices(data);
     } catch (err) {
-      console.log(err.message);
+      toast.error("Load notices error!");
     }
   };
   return (

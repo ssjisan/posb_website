@@ -226,7 +226,9 @@ export default function EventsSlider({
                     <Typography variant="body1">{data.location}</Typography>
                   </Box>
                 </Box>
-                <Button onClick={() => handleEventDetailsClick(data)}>Event Details</Button>
+                <Button onClick={() => handleEventDetailsClick(data)}>
+                  Event Details
+                </Button>
               </Box>
             </Box>
           ))}
@@ -253,7 +255,11 @@ export default function EventsSlider({
           ></Box>
         ))}
       </Box>
-      <EventDrawer open={open} toggleDrawer={toggleDrawer} eventData={selectedEvent}/>
+      <EventDrawer
+        open={open}
+        toggleDrawer={toggleDrawer}
+        eventData={selectedEvent}
+      />
     </div>
   );
 }

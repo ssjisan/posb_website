@@ -2,37 +2,15 @@ import { Container, Box, Grid, useMediaQuery, Skeleton } from "@mui/material";
 import HeaderSection from "./HeaderSection";
 import EventInfo from "./EventInfo";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { useContext, useState } from "react";
 import EventDrawer from "../../Events/EventDrawer";
+import { DataContext } from "../../../DataProcessing/DataProcessing";
 
 export default function LatestEvent() {
   const { pathname } = useLocation();
   const forBelow767 = useMediaQuery("(max-width:767px)");
-  const [lastEvent, setLastEvent] = useState(null);
-  const [loading, setLoading] = useState(true); // State for loading
+  const { lastEvent, loading } = useContext(DataContext);
   const [drawerOpen, setDrawerOpen] = useState(false); // State for drawer
-
-  useEffect(() => {
-    loadEvents();
-  }, []);
-
-  const loadEvents = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/events`
-      );
-      if (data.length > 0) {
-        setLastEvent(data[0]);
-      }
-    } catch (err) {
-      toast.error("Event Loading Problem.");
-    } finally {
-      setLoading(false); // Set loading to false after data is loaded
-    }
-  };
-
   // Function to toggle drawer
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
@@ -93,7 +71,11 @@ export default function LatestEvent() {
         </Grid>
       </Container>
       {/* Render the EventDrawer */}
-      <EventDrawer open={drawerOpen} toggleDrawer={toggleDrawer} eventData={lastEvent} />
+      <EventDrawer
+        open={drawerOpen}
+        toggleDrawer={toggleDrawer}
+        eventData={lastEvent}
+      />
     </Box>
   );
 }

@@ -1,11 +1,12 @@
 import { Box, Typography, IconButton, Skeleton } from "@mui/material";
 import Slider from "react-slick";
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { useContext, useRef } from "react";
 import { LeftArrow, RightArrow } from "../../../assets/Icons";
+import { DataContext } from "../../../DataProcessing/DataProcessing";
 
 export default function ExecutiveSlider() {
+  const { executiveLoading, executiveError, committees } =
+    useContext(DataContext);
   let sliderRef = useRef(null);
   const next = () => {
     sliderRef.slickNext();
@@ -50,33 +51,9 @@ export default function ExecutiveSlider() {
     ],
   };
 
-  const [committees, setCommittees] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    loadCommittees();
-  }, []);
-
-  const loadCommittees = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/executive-committee`
-      );
-
-      setCommittees([data[0]]);
-      setLoading(false);
-      setError(false);
-    } catch (error) {
-      toast.error("Failed to load committees");
-      setLoading(false);
-      setError(true);
-    }
-  };
-
   return (
     <div className="slider-container">
-      {loading ? (
+      {executiveLoading ? (
         <Slider
           {...settings}
           ref={(slider) => {
@@ -117,7 +94,7 @@ export default function ExecutiveSlider() {
             </Box>
           ))}
         </Slider>
-      ) : error ? (
+      ) : executiveError ? (
         <Box
           sx={{
             display: "flex",

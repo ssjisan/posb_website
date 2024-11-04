@@ -7,48 +7,20 @@ import PresidentSpeech from "../Components/Common/PresidentSpeech/PresidentSpeec
 import EventNews from "../Components/Common/Notice&News/NoticeNews";
 import Location from "../Components/Common/Location";
 import ExecutiveMember from "../Components/Common/ExecutiveMember/ExecutiveMember";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import BigEventModal from "../Components/Common/BigEvent/BigEventModal";
 import Navbar from "../Layout/Navbar/Navbar";
-import axios from "axios";
+import { DataContext } from "../DataProcessing/DataProcessing";
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { events, isModalOpen, handleCloseModal } = useContext(DataContext);
 
-  useEffect(() => {
-    const lastShown = localStorage.getItem("modalLastShown");
-    const now = new Date().getTime();
-
-    // Show modal if 24 hours have passed since the last shown time
-    if (!lastShown || now - lastShown > 24 * 60 * 60 * 1000) {
-      setIsModalOpen(true);
-      localStorage.setItem("modalLastShown", now);
-    }
-  }, []);
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-  const [events, setEvents] = useState([]);
-  // Load Event
-  useEffect(() => {
-    loadEvents();
-  }, []);
-
-  const loadEvents = async () => {
-    try {
-      const response = await axios.get('https://posb-server.vercel.app/events');
-      setEvents(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <>
       <BigEventModal open={isModalOpen} onClose={handleCloseModal} />
-      <Navbar/>
+      <Navbar />
       <HeroSection />
-      <LatestEvent />
+      {events.length > 1 && <LatestEvent />}
       {events.length > 1 && <UpcomingEvents />}
       <OurJourney />
       <PresidentSpeech />
