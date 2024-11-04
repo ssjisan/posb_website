@@ -164,8 +164,11 @@ export default function ExecutiveSlider() {
                     }}
                   >
                     <img
-                      src={member.profilePhoto[0].url}
-                      alt={member.name}
+                      src={
+                        member?.profilePhoto?.length
+                          ? member.profilePhoto[0]?.url
+                          : "https://res.cloudinary.com/dzdjgu1vc/image/upload/v1730688763/posb/members/b2e5qajsnjqjtlel2xx3.png"
+                      }
                       width="100%"
                       height="100%"
                       style={{ objectFit: "cover" }}

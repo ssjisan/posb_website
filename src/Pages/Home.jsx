@@ -48,11 +48,11 @@ export default function Home() {
       <BigEventModal open={isModalOpen} onClose={handleCloseModal} />
       <Navbar/>
       <HeroSection />
-      <OurJourney />
-      <ExecutiveMember />
       <LatestEvent />
       {events.length > 1 && <UpcomingEvents />}
+      <OurJourney />
       <PresidentSpeech />
+      <ExecutiveMember />
       <EventNews />
       <Location />
       <Footer />
