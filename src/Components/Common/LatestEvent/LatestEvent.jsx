@@ -19,14 +19,7 @@ export default function LatestEvent() {
   return (
     <Box
       sx={{
-        p:
-          pathname === "/upcoming_events"
-            ? forBelow767
-              ? "100px 0px 40px 0px"
-              : "210px 0px 64px 0px"
-            : forBelow767
-            ? "40px 0px"
-            : "64px 0px",
+        p: forBelow767 ? "40px 0px" : "64px 0px",
       }}
     >
       <Container

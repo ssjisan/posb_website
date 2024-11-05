@@ -16,7 +16,7 @@ export default function useEventData() {
     try {
       setLoading(true); // Set loading to true when fetching data
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/events`
+        `${process.env.REACT_APP_SERVER_API}/all_events`
       );
       const eventData = response.data;
       setEvents(eventData);

@@ -4,13 +4,10 @@ import { Calender, Clock, Close, Location } from "../../assets/Icons";
 import { format } from "date-fns";
 
 export default function EventDrawer({ toggleDrawer, open, eventData }) {
-  const DetailsSx = {
-    width: "100%",
-    maxWidth: "450px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-  };
+  const isLinkExpired = eventData?.linkExpireDate
+    ? new Date() > new Date(eventData.linkExpireDate)
+    : true; // Default to `true` if `linkExpireDate` is not provided
+
   const IconBoxSx = {
     width: "24px",
     height: "24px",
@@ -74,12 +71,17 @@ export default function EventDrawer({ toggleDrawer, open, eventData }) {
           <Typography variant="body1">{eventData?.location}</Typography>
         </Box>
         {eventData?.registrationLink ? (
-          eventData?.linkExpire ? (
+          isLinkExpired ? (
             <Typography variant="body1" color="error">
               Registration is Closed
             </Typography>
           ) : (
-            <Button variant="contained" href={eventData?.registrationLink}>
+            <Button
+              variant="contained"
+              href={eventData?.registrationLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Registration
             </Button>
           )

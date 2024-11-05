@@ -20,7 +20,7 @@ export default function Home() {
       <BigEventModal open={isModalOpen} onClose={handleCloseModal} />
       <Navbar />
       <HeroSection />
-      {events.length > 1 && <LatestEvent />}
+      <LatestEvent />
       {events.length > 1 && <UpcomingEvents />}
       <OurJourney />
       <PresidentSpeech />

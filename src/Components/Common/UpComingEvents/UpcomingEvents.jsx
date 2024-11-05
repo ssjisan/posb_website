@@ -10,11 +10,13 @@ import EventsSlider from "./EventsSlider";
 import { useContext, useState } from "react";
 import { DataContext } from "../../../DataProcessing/DataProcessing";
 import toast from "react-hot-toast"; // Import the toast library
+import { useLocation } from "react-router-dom";
 
 export default function UpcomingEvents() {
   const forBelow767 = useMediaQuery("(max-width:767px)");
   const [activeIndex, setActiveIndex] = useState(0); // Initialize active index state
   const { loading, events } = useContext(DataContext);
+  const { pathname } = useLocation();
 
   // Show an error toast if events could not load and loading is false
   if (!loading && events.length === 0) {
@@ -24,7 +26,14 @@ export default function UpcomingEvents() {
   return (
     <Box
       sx={{
-        p: forBelow767 ? "40px 0px" : "64px 0px",
+        p:
+        pathname === "/upcoming_events"
+          ? forBelow767
+            ? "100px 0px 40px 0px"
+            : "210px 0px 64px 0px"
+          : forBelow767
+          ? "40px 0px"
+          : "64px 0px",
         background: "#FAFAFA",
       }}
     >
