@@ -1,13 +1,11 @@
 import { Container, Box, Grid, useMediaQuery, Skeleton } from "@mui/material";
 import HeaderSection from "./HeaderSection";
 import EventInfo from "./EventInfo";
-import { useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
 import EventDrawer from "../../Events/EventDrawer";
 import { DataContext } from "../../../DataProcessing/DataProcessing";
 
 export default function LatestEvent() {
-  const { pathname } = useLocation();
   const forBelow767 = useMediaQuery("(max-width:767px)");
   const { lastEvent, loading } = useContext(DataContext);
   const [drawerOpen, setDrawerOpen] = useState(false); // State for drawer
