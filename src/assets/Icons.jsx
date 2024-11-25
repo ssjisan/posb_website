@@ -432,19 +432,67 @@ export const Plus = ({ color, size }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M10 3V17"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M3 10H17"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+      <path d="M10 3V17" stroke={color} strokeWidth="2" strokeLinecap="round" />
+      <path d="M3 10H17" stroke={color} strokeWidth="2" strokeLinecap="round" />
     </svg>
+  );
+};
+export const Play = ({ color, size }) => {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9.13587 6.68152C8.63598 6.38159 8 6.74167 8 7.32464V16.6754C8 17.2583 8.63598 17.6184 9.13587 17.3185L16.9281 12.6431C17.4136 12.3518 17.4136 11.6482 16.9281 11.3569L9.13587 6.68152Z"
+          fill={color}
+          stroke={color}
+          stroke-width="1.5"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+  );
+};
+
+export const Cross = ({ color, size }) => {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M18 6.00005L6 18M5.99995 6L17.9999 18"
+          stroke={color}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
   );
 };
 Menu.propTypes = {
@@ -459,6 +507,14 @@ Phone.propTypes = {
   size: PropTypes.string.isRequired,
 };
 Plus.propTypes = {
+  color: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
+};
+Play.propTypes = {
+  color: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
+};
+Cross.propTypes = {
   color: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
 };
