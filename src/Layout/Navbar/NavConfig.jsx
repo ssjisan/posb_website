@@ -16,21 +16,26 @@ const main = [
   },
   {
     id: 4,
+    title: "Lectures",
+    link: "/lectures",
+  },
+  {
+    id: 5,
     title: "Members",
     link: "/members",
   },
   {
-    id: 5,
+    id: 6,
     title: "Link",
     link: "/link",
   },
   {
-    id: 6,
+    id: 7,
     title: "Forms",
     link: "/forms",
   },
   {
-    id: 7,
+    id: 8,
     title: "Contact",
     link: "/contact",
   },

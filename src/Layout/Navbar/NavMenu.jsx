@@ -1,4 +1,4 @@
-import { Box, IconButton, Typography, useMediaQuery } from "@mui/material";
+import { Box, IconButton, Stack, Typography, useMediaQuery } from "@mui/material";
 import { main } from "./NavConfig";
 import { Link, useLocation } from "react-router-dom";
 import { Symbolic } from "../../assets/Symbolic";
@@ -125,7 +125,8 @@ export default function NavMenu({ isScrolled }) {
             return (
               <Box sx={MenuListSx} key={data.id} onClick={goToTop}>
                 <Link to={data.link} style={linkStyle}>
-                  <Box
+                  <Stack
+                  flexDirection="row" gap="16px"
                     sx={{
                       ...MenuButtonSx,
                       borderBottom:
@@ -155,7 +156,7 @@ export default function NavMenu({ isScrolled }) {
                     >
                       {data.title}
                     </Typography>
-                  </Box>
+                  </Stack>
                 </Link>
               </Box>
             );

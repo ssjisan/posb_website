@@ -1,27 +1,55 @@
-import { Grid, Skeleton } from "@mui/material";
+import { Button, Grid, Skeleton, Stack } from "@mui/material";
 import VideoCard from "./VideoCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 export default function VideoCardDeck() {
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true); // State to track loading
+  const [allVideos, setAllVideos] = useState([]);
+  const [skip, setSkip] = useState(0); // Track how many videos to skip
+  const [hasMore, setHasMore] = useState(true); // Whether there are more videos to load
+  const [loading, setLoading] = useState(false); // Track loading state
+  const limit = 5; // Number of videos to load per request
 
   useEffect(() => {
-    loadVideos();
+    loadVideos(true); // Initial load
   }, []);
 
-  const loadVideos = async () => {
+  const loadVideos = async (initial = false) => {
+    if (loading) return; // Prevent multiple requests
+    if (!hasMore && !initial) return; // Stop if no more videos
+
     try {
+      setLoading(true);
+
+      // Calculate the correct skip value
+      const currentSkip = initial ? 0 : skip;
+
+      // Call the server with limit and skip as query parameters
       const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/list_videos`
+        `${process.env.REACT_APP_SERVER_API}/videos`,
+        {
+          params: { limit, skip: currentSkip },
+        }
       );
-      setVideos(data); // Set all videos from the API
+
+      if (initial) {
+        // If it's the initial load, replace the videos
+        setAllVideos(data.videos);
+      } else {
+        // Otherwise, append the new videos
+        setAllVideos((prev) => [...prev, ...data.videos]);
+      }
+
+      // Update the skip value for the next batch
+      setSkip(currentSkip + limit);
+
+      // Update hasMore based on the server response
+      setHasMore(data.hasMore);
     } catch (err) {
-      toast.error(err.message);
+      toast.error("Error loading videos");
     } finally {
-      setLoading(false); // Set loading to false after fetching data
+      setLoading(false); // Reset loading state
     }
   };
 
@@ -33,9 +61,23 @@ export default function VideoCardDeck() {
   };
 
   return (
-    <Grid container rowSpacing={4} columnSpacing={4} justifyContent="center">
-      {loading
-        ? [0, 1, 2].map((index) => (
+    <Stack gap="64px" justifyContent="center" alignItems="center">
+      <Grid container rowSpacing={4} columnSpacing={4} justifyContent="center">
+        {allVideos.map((data) => {
+          const videoId = getVideoId(data.url); // Get video ID from URL
+          const thumb =
+            data.videoType === "google-drive"
+              ? data.thumbnail[0]?.url
+              : `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+          return (
+            <Grid item xs={12} sm={6} md={6} lg={4} key={data._id}>
+              <VideoCard data={data} thumb={thumb} />
+            </Grid>
+          );
+        })}
+
+        {loading &&
+          [0, 1, 2].map((index) => (
             <Grid item xs={12} sm={6} md={6} lg={4} key={index}>
               <Skeleton
                 variant="rectangular"
@@ -49,19 +91,12 @@ export default function VideoCardDeck() {
               />
               <Skeleton variant="text" width="60%" />
             </Grid>
-          ))
-        : videos.map((data) => {
-            const videoId = getVideoId(data.url); // Get video ID from URL
-            const thumb =
-              data.videoType === "google-drive"
-                ? data.thumbnail[0]?.url
-                : `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-            return (
-              <Grid item xs={12} sm={6} md={6} lg={4} key={data._id}>
-                <VideoCard data={data} thumb={thumb} />
-              </Grid>
-            );
-          })}
-    </Grid>
+          ))}
+      </Grid>
+
+      {hasMore && !loading && (
+        <Button onClick={() => loadVideos(false)} variant="contained" sx={{width:"120px"}}>Load More</Button>
+      )}
+    </Stack>
   );
 }
