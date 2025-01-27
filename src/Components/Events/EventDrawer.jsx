@@ -38,7 +38,7 @@ export default function EventDrawer({ toggleDrawer, open, eventData }) {
           }}
         >
           <img
-            src={`https://posb-server.vercel.app/event/image/${eventData?._id}`}
+            src={eventData?.coverPhoto[0].url}
             alt=""
             width="100%"
             height="100%"
@@ -52,7 +52,7 @@ export default function EventDrawer({ toggleDrawer, open, eventData }) {
           </Box>
           {eventData?.eventDate ? (
             <Typography variant="body1">
-              {format(new Date(eventData?.eventDate), "dd/MM/yyyy")}
+              {format(new Date(eventData?.eventDate), "dd MMMM, yyyy")}
             </Typography>
           ) : (
             <Typography variant="body1">Date not available</Typography>
@@ -62,7 +62,13 @@ export default function EventDrawer({ toggleDrawer, open, eventData }) {
           <Box sx={IconBoxSx}>
             <Clock />
           </Box>
-          <Typography variant="body1">{eventData?.eventTime}</Typography>
+          {eventData?.eventTime ? (
+            <Typography variant="body1">
+              {format(new Date(eventData?.eventTime), "hh:mm a")}
+            </Typography>
+          ) : (
+            <Typography variant="body1">Date not available</Typography>
+          )}
         </Box>
         <Box sx={PointSx}>
           <Box sx={IconBoxSx}>
@@ -90,7 +96,10 @@ export default function EventDrawer({ toggleDrawer, open, eventData }) {
       <Divider />
       <Stack gap="8px" sx={{ p: "16px 24px" }}>
         <Typography variant="h4">About this event</Typography>
-        <Typography variant="body1">{eventData?.description}</Typography>
+        <Typography
+          sx={{ whiteSpace: "pre-wrap" }} // Ensure white space is preserved
+          dangerouslySetInnerHTML={{ __html: eventData?.details }} // Render HTML content safely
+        />
       </Stack>
     </Box>
   );

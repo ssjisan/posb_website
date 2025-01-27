@@ -5,7 +5,7 @@ import { Close } from "../../../assets/Icons";
 import { DataContext } from "../../../DataProcessing/DataProcessing";
 
 export default function BigEventModal() {
-  const { lastEvent, handleCloseModal, isModalOpen } = useContext(DataContext);
+  const { latestEvent, handleCloseModal, isModalOpen } = useContext(DataContext);
 
   return (
     <Dialog
@@ -36,9 +36,9 @@ export default function BigEventModal() {
           overflow: "hidden",
         }}
       >
-        {lastEvent && (
+        {latestEvent && (
           <img
-            src={`https://posb-server.vercel.app/event/image/${lastEvent._id}`}
+            src={latestEvent?.coverPhoto[0].url}
             alt="Event Image"
             style={{
               objectFit: "contain",

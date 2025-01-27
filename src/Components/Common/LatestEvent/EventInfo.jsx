@@ -12,9 +12,9 @@ import PropTypes from "prop-types";
 
 export default function EventInfo({ lastEvent, loading, onEventDetailsClick }) {
   const forBelow599 = useMediaQuery("(max-width:599px)");
-  const isLinkExpired = lastEvent?.linkExpireDate 
-  ? new Date() > new Date(lastEvent.linkExpireDate)
-  : true; // Default to `true` if `linkExpireDate` is not provided
+  const isLinkExpired = lastEvent?.linkExpireDate
+    ? new Date() > new Date(lastEvent.linkExpireDate)
+    : true; // Default to `true` if `linkExpireDate` is not provided
 
   const DetailsSx = {
     width: "100%",
@@ -75,7 +75,9 @@ export default function EventInfo({ lastEvent, loading, onEventDetailsClick }) {
               <Box sx={IconBoxSx}>
                 <Clock />
               </Box>
-              <Typography variant="h6">{lastEvent.eventTime}</Typography>
+              <Typography variant="h6">
+                {format(new Date(lastEvent.eventTime), "hh:mm a")}
+              </Typography>
             </Box>
             <Box sx={PointSx}>
               <Box sx={IconBoxSx}>
@@ -83,7 +85,12 @@ export default function EventInfo({ lastEvent, loading, onEventDetailsClick }) {
               </Box>
               <Typography variant="h6">{lastEvent.location}</Typography>
             </Box>
-            <Stack direction="row" gap="16px" sx={{ mt: "24px" }} alignItems="center">
+            <Stack
+              direction="row"
+              gap="16px"
+              sx={{ mt: "24px" }}
+              alignItems="center"
+            >
               <Button variant="outlined" onClick={onEventDetailsClick}>
                 Event Details
               </Button>

@@ -6,8 +6,9 @@ export default function useEventData() {
   const [events, setEvents] = useState([]);
   const [lastEvent, setLastEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
+  const [latestEvent, setLatestEvent] = useState(null); // Initialize state with null
   useEffect(() => {
     loadEvents();
   }, []);
@@ -16,7 +17,7 @@ export default function useEventData() {
     try {
       setLoading(true); // Set loading to true when fetching data
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/all_events`
+        `${process.env.REACT_APP_SERVER_API}/events-by-status`
       );
       const eventData = response.data;
       setEvents(eventData);
@@ -55,11 +56,31 @@ export default function useEventData() {
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    loadLatestEvent();
+  }, []);
+  const loadLatestEvent = async () => {
+    try {
+      setLoading(true); // Start loading
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_API}/latest-event`
+      );
+      const latest = response.data.event;
+      setLatestEvent(latest); // Set the fetched event data
+      setError(null); // Clear any previous errors
+    } catch (err) {
+      console.error("Error fetching the latest event:", err);
+      setError("Failed to fetch the latest event."); // Set error message
+    } finally {
+      setLoading(false); // End loading
+    }
+  };
   return {
     events,
     lastEvent, // Include lastEvent in the returned object
     isModalOpen,
     loading, // Include loading state in the returned object
     handleCloseModal,
+    latestEvent
   };
 }

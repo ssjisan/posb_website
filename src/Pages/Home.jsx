@@ -22,10 +22,10 @@ export default function Home() {
       <HeroSection />
       <LatestEvent />
       {events.length > 1 && <UpcomingEvents />}
+      <EventNews />
       <OurJourney />
       <PresidentSpeech />
       <ExecutiveMember />
-      <EventNews />
       <Location />
       <Footer />
     </>

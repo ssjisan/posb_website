@@ -33,8 +33,7 @@ export default function HeroSection() {
               color: "#fff",
             }}
           >
-            Advocating for orthopedic patients&apos; needs, promoting excellence
-            in care
+            Pediatric orthopedic excellence. Bringing mobility back to life.
           </Typography>
           <Typography
                       variant="h4"

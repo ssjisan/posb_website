@@ -175,7 +175,7 @@ export default function EventsSlider({
                 }}
               >
                 <img
-                  src={`https://posb-server.vercel.app/event/image/${data._id}`}
+                  src={data?.coverPhoto[0].url}
                   alt=""
                   width="100%"
                   height="100%"
@@ -210,14 +210,14 @@ export default function EventsSlider({
                       <Calender />
                     </Box>
                     <Typography variant="body1">
-                      {format(new Date(data?.eventDate), "dd/MM/yyyy")}
+                      {format(new Date(data.eventDate), "dd MMMM, yyyy")}
                     </Typography>
                   </Box>
                   <Box sx={{ ...PointSx, alignItems: "center" }}>
                     <Box sx={IconBoxSx}>
                       <Clock />
                     </Box>
-                    <Typography variant="body1">{data.eventTime}</Typography>
+                    <Typography variant="body1">{format(new Date(data.eventTime), "hh:mm a")}</Typography>
                   </Box>
                   <Box sx={PointSx}>
                     <Box sx={IconBoxSx}>
