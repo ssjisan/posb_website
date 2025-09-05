@@ -13,9 +13,7 @@ export default function useExecutiveBodyData() {
 
   const loadCommittees = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/executive-committee`
-      );
+      const { data } = await axios.get("/executive-committee");
 
       setCommittees([data[0]]);
       setExecutiveLoading(false);

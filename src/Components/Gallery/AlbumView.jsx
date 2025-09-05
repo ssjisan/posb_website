@@ -1,49 +1,81 @@
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import toast from "react-hot-toast";
 import ImageGallery from "react-image-gallery";
-import { Box, IconButton, Modal, useMediaQuery } from "@mui/material";
 import "react-image-gallery/styles/css/image-gallery.css";
-import "./GalleryStyles.css"
-import { Close } from "../../assets/Icons";
-//eslint-disable-next-line
-export default function AlbumView({ handleClose, open, galleryImages }) {
-  const forBelow767 = useMediaQuery("(max-width:767px)");
-  const GalleryStyle = {
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "100%",
-    p: 4,
-    border: "0px solid transparent",
-    boxShadow: 0,
-    position: "relative", // Required for absolute positioning of close button
+import "./GalleryStyles.css";
+export default function AlbumView() {
+  const { id } = useParams();
+  const [album, setAlbum] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const isTablet = useMediaQuery("(max-width:768px)");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (id) loadAlbum();
+  }, [id]);
+
+  const loadAlbum = async () => {
+    try {
+      const { data } = await axios.get(`/album/${id}`);
+      setAlbum(data);
+    } catch (err) {
+      toast.error("Failed to load album");
+    } finally {
+      setLoading(false);
+    }
   };
 
+  if (loading) return <CircularProgress />;
+  if (!album) return <Typography>No album found</Typography>;
+
+  const formattedImages = album.images.map((image) => ({
+    original: image.src || image,
+    thumbnail: image.src || image,
+  }));
+
   return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      BackdropProps={{
-        style: {
-          backgroundColor: "rgba(0, 32, 51, 0.64)",
-        },
+    <Box
+      sx={{
+        height: "100vh",
+        background: "#fff",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <Box sx={GalleryStyle}>
-        {/* Close Button */}
-        <IconButton
-          onClick={handleClose}
-          sx={{
-            position: "absolute",
-            top: forBelow767 && -10,
-            right: 40,
-            zIndex: "10000000",
-            bgcolor: "white", // Remove background
-          }}
+      <Stack
+        flexDirection="row"
+        alignItems="center"
+        sx={{ p: "12px", borderBottom: "1px solid #e1e1e1ff", mb: 2 }}
+      >
+        <Button
+          sx={{ width: "fit-content" }}
+          onClick={() => navigate(-1)}
         >
-         <Close/>
-        </IconButton>
+          Back
+        </Button>
+        <Stack sx={{ width: "100%", textAlign: "center" }}>
+          <Typography variant="h4">{album.name}</Typography>
+        </Stack>
+      </Stack>
 
-        <ImageGallery items={galleryImages} />
+      <Box sx={{ flex: 1 }}>
+        <ImageGallery
+          items={formattedImages}
+          showPlayButton={false}
+          showFullscreenButton={false}
+          thumbnailPosition={isTablet ? "bottom" : "left"}
+        />
       </Box>
-    </Modal>
+    </Box>
   );
 }

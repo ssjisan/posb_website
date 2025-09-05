@@ -39,7 +39,7 @@ import {
       try {
         setIsSubmitting(true);
         const response = await axios.post(
-          "https://posb-server.vercel.app/upload-message",
+          "/upload-message",
           formData
         );
         console.log("Form submitted successfully:", response.data);

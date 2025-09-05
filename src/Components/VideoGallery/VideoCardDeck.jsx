@@ -26,8 +26,7 @@ export default function VideoCardDeck() {
       const currentSkip = initial ? 0 : skip;
 
       // Call the server with limit and skip as query parameters
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/videos`,
+      const { data } = await axios.get("/videos",
         {
           params: { limit, skip: currentSkip },
         }

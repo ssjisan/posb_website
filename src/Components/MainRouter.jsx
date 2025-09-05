@@ -8,6 +8,8 @@ import { Toaster } from "react-hot-toast";
 import Journal from "../Pages/Journal";
 import Forms from "../Pages/Forms";
 import Lectures from "../Pages/Lectures";
+import AlbumView from "./Gallery/AlbumView";
+import Registration from "./Registration/Registration";
 
 export default function MainRoute() {
   return (
@@ -22,6 +24,9 @@ export default function MainRoute() {
         <Route path="members" element={<Member />} />
         <Route path="link" element={<Journal />} />
         <Route path="forms" element={<Forms />} />
+        <Route path="albums-preview/:id" element={<AlbumView />} />
+        <Route path="registration/:id" element={<Registration />} />
+        <Route path="registration-tracker" element={<Registration />} />
       </Routes>
     </>
   );

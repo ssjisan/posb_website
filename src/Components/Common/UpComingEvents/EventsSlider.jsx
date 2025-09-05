@@ -175,7 +175,11 @@ export default function EventsSlider({
                 }}
               >
                 <img
-                  src={data?.coverPhoto[0].url}
+                  src={
+                    data?.coverPhoto?.url
+                      ? data?.coverPhoto?.url
+                      : "/placeholder.png"
+                  }
                   alt=""
                   width="100%"
                   height="100%"
@@ -217,7 +221,9 @@ export default function EventsSlider({
                     <Box sx={IconBoxSx}>
                       <Clock />
                     </Box>
-                    <Typography variant="body1">{format(new Date(data.eventTime), "hh:mm a")}</Typography>
+                    <Typography variant="body1">
+                      {format(new Date(data.eventTime), "hh:mm a")}
+                    </Typography>
                   </Box>
                   <Box sx={PointSx}>
                     <Box sx={IconBoxSx}>
@@ -273,5 +279,5 @@ EventsSlider.propTypes = {
 };
 
 EventsSlider.defaultProps = {
-  events: [], // Default empty array for events if not provided
+  events: [],
 };

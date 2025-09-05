@@ -16,9 +16,7 @@ export default function useEventData() {
   const loadEvents = async () => {
     try {
       setLoading(true); // Set loading to true when fetching data
-      const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/events-by-status`
-      );
+      const response = await axios.get("/events-by-status");
       const eventData = response.data;
       setEvents(eventData);
 
@@ -62,9 +60,7 @@ export default function useEventData() {
   const loadLatestEvent = async () => {
     try {
       setLoading(true); // Start loading
-      const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/latest-event`
-      );
+      const response = await axios.get("/latest-event");
       const latest = response.data.event;
       setLatestEvent(latest); // Set the fetched event data
       setError(null); // Clear any previous errors
@@ -81,6 +77,7 @@ export default function useEventData() {
     isModalOpen,
     loading, // Include loading state in the returned object
     handleCloseModal,
-    latestEvent
+    latestEvent,
+    error,
   };
 }

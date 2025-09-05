@@ -59,9 +59,7 @@ export default function NewsSlider() {
 
   const loadNotices = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/notices`
-      );
+      const { data } = await axios.get("/notices");
       setNotices(data);
     } catch (err) {
       toast.error("Load notices error!");

@@ -20,9 +20,7 @@ export default function FormTable() {
 
   const loadJournals = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/forms`
-      );
+      const { data } = await axios.get("/forms");
       setJournals(data);
     } catch (err) {
       toast.error("Journals can't load");

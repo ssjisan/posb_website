@@ -38,7 +38,7 @@ export default function BigEventModal() {
       >
         {latestEvent && (
           <img
-            src={latestEvent?.coverPhoto[0].url}
+            src={latestEvent?.coverPhoto?.url ? latestEvent?.coverPhoto?.url : "/placeholder.png"}
             alt="Event Image"
             style={{
               objectFit: "contain",

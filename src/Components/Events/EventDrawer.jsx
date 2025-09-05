@@ -4,10 +4,6 @@ import { Calender, Clock, Close, Location } from "../../assets/Icons";
 import { format } from "date-fns";
 
 export default function EventDrawer({ toggleDrawer, open, eventData }) {
-  const isLinkExpired = eventData?.linkExpireDate
-    ? new Date() > new Date(eventData.linkExpireDate)
-    : true; // Default to `true` if `linkExpireDate` is not provided
-
   const IconBoxSx = {
     width: "24px",
     height: "24px",
@@ -38,7 +34,11 @@ export default function EventDrawer({ toggleDrawer, open, eventData }) {
           }}
         >
           <img
-            src={eventData?.coverPhoto[0].url}
+            src={
+              eventData?.coverPhoto?.url
+                ? eventData?.coverPhoto?.url
+                : "/placeholder.png"
+            }
             alt=""
             width="100%"
             height="100%"
@@ -76,22 +76,16 @@ export default function EventDrawer({ toggleDrawer, open, eventData }) {
           </Box>
           <Typography variant="body1">{eventData?.location}</Typography>
         </Box>
-        {eventData?.registrationLink ? (
-          isLinkExpired ? (
-            <Typography variant="body1" color="error">
-              Registration is Closed
-            </Typography>
-          ) : (
-            <Button
-              variant="contained"
-              href={eventData?.registrationLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Registration
-            </Button>
-          )
-        ) : null}
+        {eventData?.registrationRequired && (
+          <Button
+            variant="contained"
+            href={`/registration/${eventData._id}`}
+            
+            rel="noopener noreferrer"
+          >
+            Registration
+          </Button>
+        )}
       </Stack>
       <Divider />
       <Stack gap="8px" sx={{ p: "16px 24px" }}>

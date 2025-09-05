@@ -1,9 +1,8 @@
 import { Container, Box, Grid, useMediaQuery, Skeleton } from "@mui/material";
 import HeaderSection from "./HeaderSection";
 import EventInfo from "./EventInfo";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import EventDrawer from "../../Events/EventDrawer";
-import axios from "axios";
 import { DataContext } from "../../../DataProcessing/DataProcessing";
 
 export default function LatestEvent() {
@@ -51,11 +50,15 @@ export default function LatestEvent() {
                 <Skeleton variant="rectangular" width="100%" height="100%" />
               ) : (
                 <img
-                  src={latestEvent?.coverPhoto[0].url}
+                  src={
+                    latestEvent?.coverPhoto?.url
+                      ? latestEvent?.coverPhoto?.url
+                      : "/placeholder.png"
+                  }
                   alt="Event Image"
                   width="100%"
                   height="100%"
-                  style={{ objectFit: "contain" }}
+                  style={{ objectFit: "cover" }}
                 />
               )}
             </Box>

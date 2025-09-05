@@ -24,7 +24,7 @@ export default function TopNav() {
     // Fetch existing contact info
     const fetchContactInfo = async () => {
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_SERVER_API}/contact-info`); // Fetch data from the endpoint
+        const { data } = await axios.get("/contact-info"); // Fetch data from the endpoint
         const { phoneNumber, whatsapp } = data;
         setPhone(phoneNumber); // Set phone data or empty string if undefined
         setWhatsapp(whatsapp); // Set WhatsApp data or empty string if undefined
