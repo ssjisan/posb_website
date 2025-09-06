@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 export default function Registration() {
   const navigate = useNavigate();
   const { id } = useParams(); // eventId from route params
-  console.log("res.data", id);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -15,25 +14,28 @@ export default function Registration() {
     phone: "",
     designation: "",
     workplace: "",
-    course: "",
+    senderNumber: "",
+    transactionId: "",
   });
 
-  // Fetch event details on component mount
+  const [course, setCourse] = useState({
+    id: id,
+    name: "",
+  });
+
+  // Fetch event details
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const res = await axios.get(`/events/${id}`); // your API endpoint
+        const res = await axios.get(`/events/${id}`);
         const eventData = res.data;
-        console.log("res.data", res.data);
-
-        // Populate course name
-        setFormData((prev) => ({ ...prev, course: eventData.name }));
+        setCourse({ id: eventData._id, name: eventData.name });
       } catch (err) {
         console.error("Failed to fetch event data:", err);
       }
     };
 
-    fetchEvent();
+    if (id) fetchEvent();
   }, [id]);
 
   const handleChange = (e) => {
@@ -42,16 +44,29 @@ export default function Registration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const toastId = toast.loading("Submitting registration...");
+    if (
+      (formData.senderNumber && !formData.transactionId) ||
+      (!formData.senderNumber && formData.transactionId)
+    ) {
+      toast.dismiss();
+      toast.error(
+        "Please provide both Bkash number and Transaction ID together."
+      );
+      return;
+    }
 
     try {
-      const payload = { ...formData, course: id }; // id from useParams = event _id
+      const payload = { ...formData, course: course.id }; // send ObjectId
       const res = await axios.post("/registrations", payload);
-      console.log("Registration success:", res.data);
-      toast.success("Registration successful!");
-      navigate("/registration-tracker"); // optional
+      const registrationId = res.data.registrationId;
+      toast.success("Registration successful!", { id: toastId });
+      navigate(`/registration-tracker/${registrationId}`, {
+        state: { registrationId },
+      });
     } catch (err) {
       console.error(err);
-      toast.error("Failed to register. Please try again.");
+      toast.error("Failed to register. Please try again.", { id: toastId });
     }
   };
 
@@ -59,19 +74,22 @@ export default function Registration() {
     <Box>
       {/* Header */}
       <Stack
-        sx={{ width: "100%", borderBottom: "1px solid #c2c2c2", p: "12px" }}
-        flexDirection="row"
+        sx={{ borderBottom: "1px solid #c2c2c2", p: "12px" }}
+        direction="row"
         alignItems="center"
       >
-        <Button sx={{ width: "fit-content" }} onClick={() => navigate(-1)}>
+        <Button sx={{ width: "fit-content" }} href="/">
           Back
         </Button>
-        <Stack sx={{ width: "100%", textAlign: "center" }}>
-          <Typography variant="h4">Registration</Typography>
-        </Stack>
+        <Typography
+          variant="h4"
+          sx={{ flex: 1, textAlign: "center", mr: "48px" }}
+        >
+          Registration
+        </Typography>
       </Stack>
 
-      {/* Centered Form */}
+      {/* Form */}
       <Box
         sx={{
           display: "flex",
@@ -95,54 +113,52 @@ export default function Registration() {
             boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
           }}
         >
+          <TextField label="Course Name" value={course.name} disabled />
           <TextField
-            size="small"
             label="Name"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            required
           />
           <TextField
-            size="small"
             label="Email"
             name="email"
             type="email"
             value={formData.email}
             onChange={handleChange}
-            required
           />
           <TextField
-            size="small"
             label="Phone"
             name="phone"
             type="tel"
             value={formData.phone}
             onChange={handleChange}
-            required
           />
           <TextField
-            size="small"
             label="Designation"
             name="designation"
             value={formData.designation}
             onChange={handleChange}
           />
           <TextField
-            size="small"
-            label="Workplace"
+            label="Current Workplace"
             name="workplace"
             value={formData.workplace}
             onChange={handleChange}
           />
           <TextField
-            size="small"
-            label="Course Name"
-            name="course"
-            value={formData.course}
+            label="Payment from (Bkash number)"
+            name="senderNumber"
+            value={formData.senderNumber}
             onChange={handleChange}
-            disabled // optional: make it read-only
           />
+          <TextField
+            label="Transaction Number (TrxID)"
+            name="transactionId"
+            value={formData.transactionId}
+            onChange={handleChange}
+          />
+
           <Button type="submit" variant="contained">
             Submit
           </Button>

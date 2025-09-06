@@ -10,6 +10,7 @@ import Forms from "../Pages/Forms";
 import Lectures from "../Pages/Lectures";
 import AlbumView from "./Gallery/AlbumView";
 import Registration from "./Registration/Registration";
+import RegistrationTracker from "../Pages/RegistrationTracker";
 
 export default function MainRoute() {
   return (
@@ -26,7 +27,7 @@ export default function MainRoute() {
         <Route path="forms" element={<Forms />} />
         <Route path="albums-preview/:id" element={<AlbumView />} />
         <Route path="registration/:id" element={<Registration />} />
-        <Route path="registration-tracker" element={<Registration />} />
+        <Route path="registration-tracker/:id" element={<RegistrationTracker />} />
       </Routes>
     </>
   );
