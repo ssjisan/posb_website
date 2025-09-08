@@ -66,7 +66,12 @@ export default function Registration() {
       });
     } catch (err) {
       console.error(err);
-      toast.error("Failed to register. Please try again.", { id: toastId });
+      toast.dismiss(toastId);
+
+      // Show proper backend error message if exists
+      const message =
+        err.response?.data?.message || "Failed to register. Please try again.";
+      toast.error(message);
     }
   };
 

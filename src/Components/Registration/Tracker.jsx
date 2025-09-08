@@ -59,19 +59,18 @@ export default function Tracker() {
       </Box>
     );
   }
-
   const getStatusColor = (status) => {
     switch (status) {
       case "applied":
-        return "inherit";
+        return "#9e9e9e"; // grey[500]
       case "payment-submitted":
-        return "warning";
-      case "payment-approved":
-        return "success";
-      case "payment-rejected":
-        return "error";
+        return "#ff9800"; // warning.main
+      case "confirmed":
+        return "#4caf50"; // success.main
+      case "rejected":
+        return "#f44336"; // error.main
       default:
-        return "inherit";
+        return "#9e9e9e"; // grey[500]
     }
   };
 
@@ -163,9 +162,13 @@ export default function Tracker() {
             </Typography>
             <Chip
               label={registration.status}
-              color={getStatusColor(registration.status)}
               size="small"
-              sx={{ mt: 0.5 }}
+              sx={{
+                mt: 0.5,
+                backgroundColor: getStatusColor(registration.status),
+                color: "#fff", // or any text color that contrasts with background
+                fontWeight: 500,
+              }}
             />
           </Box>
         </Stack>
@@ -188,10 +191,14 @@ export default function Tracker() {
               noBorder
             />
           )}
+          {registration.status === "rejected" && registration.remarks && (
+            <InfoRow label="Remarks" value={registration.remarks} noBorder />
+          )}
         </Stack>
 
         {/* Action: Add Payment Info */}
-        {registration.status === "applied" && (
+        {(registration.status === "applied" ||
+          registration.status === "rejected") && (
           <Button
             variant="contained"
             fullWidth
